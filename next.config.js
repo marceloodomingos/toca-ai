@@ -21,6 +21,9 @@ module.exports = {
     RANDOM_PLAYLIST_TRACKS_API_HOST: "spotify23.p.rapidapi.com",
     RANDOM_PLAYLIST_TRACKS_API_KEY:
       "c3ca0d6a7cmsh562a8864a08ee25p1bbec9jsn0f9276f83b0d",
+    SEARCH_URL: "https://spotify23.p.rapidapi.com/search/",
+    SEARCH_API_HOST: "spotify23.p.rapidapi.com",
+    SEARCH_API_KEY: "c3ca0d6a7cmsh562a8864a08ee25p1bbec9jsn0f9276f83b0d",
   },
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint"],

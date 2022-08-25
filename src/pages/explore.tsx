@@ -11,14 +11,33 @@ import Footer from "~/components/Footer";
 
 const Explore: NextPage = () => {
   const [musics, setMusics] = useState([]);
+  const [search, setSearch] = useState();
 
   const MostPopularSongsRef = useRef(null);
 
   useEffect(() => {
-    apiTop200BrazilDaily.then((response) => {
-      setMusics(response.slice(0, 200));
-    });
-  }, []);
+    if (!search) {
+      apiTop200BrazilDaily.then((response) => {
+        setMusics(response.slice(0, 200));
+      });
+    }
+  }, [search]);
+
+  useEffect(() => {
+    const res = await axios.get(process.env.SEARCH_URL, { params: {
+      q: search,
+      type: 'multi',
+      offset: '0',
+      limit: '10',
+      numberOfTopResults: '5'
+    }, headers: {
+      'X-RapidAPI-Key': process.env.SEARCH_API_KEY,
+      'X-RapidAPI-Host': process.env.SEARCH_API_HOST,
+    }}, );
+    const data = await res.json();
+    console.log(data);
+    setMusics(data);
+  }, [search])
 
   const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
@@ -36,7 +55,7 @@ const Explore: NextPage = () => {
             <h1>Não encontrou o que queria?</h1>
             <p>Aqui você com certeza irá encontrar! Basta pesquisar as palavras chaves.</p>
           </div>
-          <input type="text" placeholder="Digite aqui..." />
+          <input type="text" placeholder="Digite aqui..." onChange={(e) => {setSearch(e.target.value)}} />
         </SearchContainer>
         {musics && (
           <MostPopularSongs ref={MostPopularSongsRef}>

@@ -37,3 +37,21 @@ export const apiRandomPlaylistOptions = axios
   .catch(function (error) {
     console.error(error);
   });
+
+const searchOptions = {
+  method: 'GET',
+  url: process.env.SEARCH_URL,
+  params: {
+    
+  },
+  headers: {
+    'X-RapidAPI-Key': process.env.SEARCH_API_KEY,
+    'X-RapidAPI-Host': process.env.SEARCH_API_HOST,
+  }
+};
+
+axios.request(searchOptions).then(function (response) {
+  console.log(response.data);
+}).catch(function (error) {
+  console.error(error);
+});
