@@ -2,11 +2,11 @@ import axios from "axios";
 
 const optionsTop200BrazilDaily = {
   method: "GET",
-  url: "https://spotify81.p.rapidapi.com/top_200_tracks",
+  url: `${process.env.TOP_200_TRACKS_URL}`,
   params: { country: "BR", period: "daily" },
   headers: {
-    "X-RapidAPI-Key": "c3ca0d6a7cmsh562a8864a08ee25p1bbec9jsn0f9276f83b0d",
-    "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
+    "X-RapidAPI-Key": `${process.env.TOP_200_TRACKS_API_KEY}`,
+    "X-RapidAPI-Host": `${process.env.TOP_200_TRACKS_API_HOST}`,
   },
 };
 
@@ -21,11 +21,11 @@ export const apiTop200BrazilDaily = axios
 
 const randomPlaylistOptions = {
   method: "GET",
-  url: "https://spotify23.p.rapidapi.com/playlist_tracks/",
+  url: `${process.env.RANDOM_PLAYLIST_TRACKS_URL}`,
   params: { id: "37i9dQZF1DX4Wsb4d7NKfP", offset: "0", limit: "100" },
   headers: {
-    "X-RapidAPI-Key": "c3ca0d6a7cmsh562a8864a08ee25p1bbec9jsn0f9276f83b0d",
-    "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
+    "X-RapidAPI-Key": `${process.env.RANDOM_PLAYLIST_TRACKS_API_KEY}`,
+    "X-RapidAPI-Host": `${process.env.RANDOM_PLAYLIST_TRACKS_API_HOST}`,
   },
 };
 

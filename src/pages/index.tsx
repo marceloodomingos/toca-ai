@@ -6,9 +6,7 @@ import { Features, MostPopularSongs, Presentation } from "~/styles/pages/home";
 import { useEffect, useRef, useState } from "react";
 import { apiTop200BrazilDaily } from "~/services/spotifyApi";
 import { Heart, MaskHappy, MusicNotesPlus, PlayCircle } from "phosphor-react";
-import axios from "axios";
 import Footer from "~/components/Footer";
-import Link from "next/link";
 
 const Home: NextPage = () => {
   const [musics, setMusics] = useState([]);
