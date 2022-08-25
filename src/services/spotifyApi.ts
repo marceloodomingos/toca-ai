@@ -2,11 +2,11 @@ import axios from "axios";
 
 const optionsTop200BrazilDaily = {
   method: "GET",
-  url: `${process.env.TOP_200_TRACKS_URL}`,
+  url: process.env.TOP_200_TRACKS_URL,
   params: { country: "BR", period: "daily" },
   headers: {
-    "X-RapidAPI-Key": `${process.env.TOP_200_TRACKS_API_KEY}`,
-    "X-RapidAPI-Host": `${process.env.TOP_200_TRACKS_API_HOST}`,
+    "X-RapidAPI-Key": process.env.TOP_200_TRACKS_API_KEY,
+    "X-RapidAPI-Host": process.env.TOP_200_TRACKS_API_HOST,
   },
 };
 
@@ -21,11 +21,11 @@ export const apiTop200BrazilDaily = axios
 
 const randomPlaylistOptions = {
   method: "GET",
-  url: `${process.env.RANDOM_PLAYLIST_TRACKS_URL}`,
-  params: { id: "37i9dQZF1DX4Wsb4d7NKfP", offset: "0", limit: "100" },
+  url: process.env.RANDOM_PLAYLIST_TRACKS_URL,
+  params: { id: "5XGXPbAPHB7Qy0AsTHrg9x", offset: "0", limit: "100" },
   headers: {
-    "X-RapidAPI-Key": `${process.env.RANDOM_PLAYLIST_TRACKS_API_KEY}`,
-    "X-RapidAPI-Host": `${process.env.RANDOM_PLAYLIST_TRACKS_API_HOST}`,
+    "X-RapidAPI-Key": process.env.RANDOM_PLAYLIST_TRACKS_API_KEY,
+    "X-RapidAPI-Host": process.env.RANDOM_PLAYLIST_TRACKS_API_HOST,
   },
 };
 
