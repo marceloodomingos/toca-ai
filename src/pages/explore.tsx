@@ -30,6 +30,13 @@ const Explore: NextPage = () => {
       <Header />
 
       <main>
+        <SearchContainer>
+          <div className="info">
+            <h1>Não encontrou o que queria?</h1>
+            <p>Aqui você com certeza irá encontrar! Basta pesquisar as palavras chaves.</p>
+          </div>
+          <input type="text" placeholder="Digite aqui..." />
+        </SearchContainer>
         {musics && (
           <MostPopularSongs ref={MostPopularSongsRef}>
             <div className="info">
