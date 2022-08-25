@@ -43,7 +43,7 @@ export const SearchContainer = styled.div`
         border: 1px solid var(--brand-red);
         border-radius: 1rem;
 
-        padding: .5rem 1rem;
+        padding: .75rem 1rem;
         color: var(--brand-red);
         font-size: 1rem;
 
