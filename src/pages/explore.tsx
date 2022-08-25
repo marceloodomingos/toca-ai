@@ -12,6 +12,7 @@ import Footer from "~/components/Footer";
 
 const Explore: NextPage = () => { 
   const [musics, setMusics] = useState([]);
+  const [musicsResults, setMusicsResults] = useState([]);
   const [search, setSearch] = useState("");
 
   const MostPopularSongsRef = useRef(null);
@@ -37,8 +38,7 @@ const Explore: NextPage = () => {
           'X-RapidAPI-Key': process.env.SEARCH_API_KEY,
           'X-RapidAPI-Host': process.env.SEARCH_API_HOST,
         }});
-        setMusics(null);
-        setMusics(res.data);
+        setMusicsResults(res.data);
       }
   
       getMusics();
@@ -141,7 +141,7 @@ const Explore: NextPage = () => {
             </ul>
           </MostPopularSongs>
         )}
-        {search && JSON.stringify(musics)}
+        {search && JSON.stringify(musicsResults)}
       </main>
 
       <Footer />
