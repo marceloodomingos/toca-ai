@@ -3,7 +3,7 @@ import { css } from "styled-components";
 export const Variables = css`
   :root {
     // main colors
-    --background: ;
+    --background: var(--beige-100);
     --white: #efefef;
     --black: #000111;
 

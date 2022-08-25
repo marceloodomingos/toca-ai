@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Header from "~/components/Header";
@@ -6,7 +6,13 @@ import Header from "~/components/Header";
 import { Features, MostPopularSongs, Presentation } from "~/styles/pages/home";
 import { useEffect, useRef, useState } from "react";
 import { apiTop200BrazilDaily } from "~/services/spotifyApi";
-import { Heart, MaskHappy, MusicNotesPlus, PlayCircle } from "phosphor-react";
+import {
+  ArrowRight,
+  Heart,
+  MaskHappy,
+  MusicNotesPlus,
+  PlayCircle,
+} from "phosphor-react";
 import Footer from "~/components/Footer";
 
 const Home: NextPage = () => {
@@ -43,6 +49,11 @@ const Home: NextPage = () => {
           <div className="about">
             <h1>Músicas na palma da sua mão.</h1>
             <p>Sua experiência musical mais descomplicada e divertida.</p>
+            <Link href="/">
+              <a>
+                Começar agora <ArrowRight />
+              </a>
+            </Link>
           </div>
           <img
             src="../../images/holding-smartphone-animated.svg"
@@ -158,7 +169,9 @@ const Home: NextPage = () => {
                   </li>
                 );
               })}
-              <Link href="./explore"><button>Descobrir mais...</button></Link>
+              <Link href="./explore">
+                <button>Descobrir mais...</button>
+              </Link>
             </ul>
           </MostPopularSongs>
         )}

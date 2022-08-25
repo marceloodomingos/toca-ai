@@ -23,7 +23,7 @@ export const Presentation = styled.div`
 
     color: var(--brand-red);
 
-    gap: 1rem;
+    gap: 2rem;
 
     width: 100%;
     max-width: 45%;
@@ -45,6 +45,23 @@ export const Presentation = styled.div`
         width: 100%;
         max-width: 420px;
       }
+    }
+
+    > a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      text-decoration: none;
+      text-transform: capitalize;
+      font-size: 1.25rem;
+
+      gap: 1rem;
+
+      color: var(--beige-500);
+      background: var(--brand-red);
+      border-radius: 0.5rem;
+      padding: 0.85rem 1.5rem;
     }
 
     > p {
@@ -243,6 +260,7 @@ export const MostPopularSongs = styled.div`
     > h1 {
       font-size: 4rem;
       line-height: 100%;
+      margin-bottom: 1rem;
     }
 
     @media (max-width: 900px) {
@@ -404,6 +422,10 @@ export const MostPopularSongs = styled.div`
           color: var(--beige-100);
 
           cursor: pointer;
+
+          @media (max-width: 768px) {
+            color: var(--brand-red);
+          }
         }
 
         @media (min-width: 768px) {
