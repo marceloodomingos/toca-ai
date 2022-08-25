@@ -10,7 +10,7 @@ import { apiTop200BrazilDaily } from "~/services/spotifyApi";
 import { Heart, MaskHappy, MusicNotesPlus, PlayCircle } from "phosphor-react";
 import Footer from "~/components/Footer";
 
-const Explore: NextPage = () => {
+const Explore: NextPage = () => { 
   const [musics, setMusics] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -36,7 +36,7 @@ const Explore: NextPage = () => {
         'X-RapidAPI-Key': process.env.SEARCH_API_KEY,
         'X-RapidAPI-Host': process.env.SEARCH_API_HOST,
       }});
-      console.log(res);
+      console.log(res.data);
       // setMusics(data);
     }
 
