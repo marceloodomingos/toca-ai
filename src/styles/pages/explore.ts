@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const SearchContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -25,7 +26,6 @@ export const SearchContainer = styled.div`
     
         > h1 {
           font-size: 4rem;
-          line-height: 100%;
         }
     
         @media (max-width: 900px) {
@@ -33,7 +33,7 @@ export const SearchContainer = styled.div`
     
           > h1 {
             font-size: 2.5rem;
-            line-height: 80%;
+            line-height: 100%;
           }
         }
     }
@@ -43,6 +43,7 @@ export const SearchContainer = styled.div`
         border: 1px solid var(--brand-red);
         border-radius: 1rem;
 
+        padding: 1rem;
         color: var(--brand-red);
         font-size: 1rem;
 
