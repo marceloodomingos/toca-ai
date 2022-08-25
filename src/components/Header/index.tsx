@@ -19,7 +19,10 @@ export default function Header() {
             <a>Sobre nós</a>
           </Link>
           <Link href="/">
-            <a>Contato</a>
+            <a>Planos</a>
+          </Link>
+          <Link href="/">
+            <a>Entrar na sua conta</a>
           </Link>
           <Link href="/">
             <a>Descubra sua vibe</a>

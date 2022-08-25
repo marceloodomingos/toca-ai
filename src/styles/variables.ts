@@ -9,6 +9,7 @@ export const Variables = css`
 
     --beige: #d9cfab;
     --beige-100: #f7f0d8;
+    --beige-200: #faf7ed;
     --beige-300: #e4ddc4;
     --beige-500: #eee5c6;
     --beige-700: #d8cfae;

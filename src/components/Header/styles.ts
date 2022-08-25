@@ -27,7 +27,7 @@ export const HeaderContainer = styled.header`
       justify-content: center;
       align-items: center;
 
-      gap: 1rem;
+      gap: 0.5rem;
       text-decoration: none;
 
       img {
@@ -53,10 +53,10 @@ export const HeaderContainer = styled.header`
 
       list-style: none;
 
-      gap: 0.5rem;
+      /* gap: 0.5rem; */
 
       > a {
-        padding: 0.85rem 1.75rem;
+        padding: 0.85rem 1.5rem;
 
         text-decoration: none;
         font-weight: bold;
@@ -80,7 +80,7 @@ export const HeaderContainer = styled.header`
         }
       }
 
-      @media (max-width: 768px) {
+      @media (max-width: 900px) {
         display: none;
       }
     }

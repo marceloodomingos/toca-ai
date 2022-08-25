@@ -41,7 +41,7 @@ const Home: NextPage = () => {
       <main>
         <Presentation>
           <div className="about">
-            <h1>Música na palma da sua mão.</h1>
+            <h1>Músicas na palma da sua mão.</h1>
             <p>Sua experiência musical mais descomplicada e divertida.</p>
           </div>
           <img
@@ -87,7 +87,7 @@ const Home: NextPage = () => {
           <MostPopularSongs ref={MostPopularSongsRef}>
             <div className="info">
               <h1>As melhores do momento</h1>
-              <p>Top 100 músicas que o play nunca para.</p>
+              <p>As músicas diárias em que o play não para.</p>
             </div>
             <ul>
               {musics.map((music, index) => {

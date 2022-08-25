@@ -30,16 +30,18 @@ export const Presentation = styled.div`
 
     > h1 {
       font-size: 5rem;
-      line-height: 80%;
+      line-height: 90%;
 
       @media (max-width: 768px) {
-        font-size: 3rem;
+        font-size: 2.75rem;
         width: 100%;
         max-width: 420px;
+
+        line-height: 80%;
       }
 
       @media (max-width: 500px) {
-        font-size: 2rem;
+        /* font-size: 2rem; */
         width: 100%;
         max-width: 420px;
       }
@@ -87,9 +89,16 @@ export const Presentation = styled.div`
     }
 
     @media (max-width: 768px) {
-      bottom: -10%;
+      right: -25%;
+      bottom: -50%;
+      height: 80vh;
 
-      height: 65vh;
+      mask-image: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        black
+      );
     }
 
     z-index: 0;
@@ -110,6 +119,7 @@ export const Presentation = styled.div`
 
   @media (max-width: 768px) {
     justify-content: flex-start;
+    height: 50vh;
   }
 `;
 
@@ -123,7 +133,7 @@ export const Features = styled.div`
   width: 100%;
   margin: 0 auto;
 
-  background: var(--beige-300);
+  background: var(--beige-500);
   padding: 10rem 1rem;
   gap: 5rem;
 
@@ -139,7 +149,7 @@ export const Features = styled.div`
 
     > h1 {
       font-size: 4rem;
-      line-height: 80%;
+      line-height: 100%;
     }
 
     @media (max-width: 900px) {
@@ -147,6 +157,7 @@ export const Features = styled.div`
 
       > h1 {
         font-size: 2.5rem;
+        line-height: 80%;
       }
     }
   }
@@ -193,6 +204,8 @@ export const Features = styled.div`
       flex-wrap: nowrap;
       flex-direction: column;
 
+      gap: 5rem;
+
       > li {
         gap: 1rem;
 
@@ -229,7 +242,7 @@ export const MostPopularSongs = styled.div`
 
     > h1 {
       font-size: 4rem;
-      line-height: 80%;
+      line-height: 100%;
     }
 
     @media (max-width: 900px) {
@@ -237,6 +250,7 @@ export const MostPopularSongs = styled.div`
 
       > h1 {
         font-size: 2.5rem;
+        line-height: 80%;
       }
     }
   }
@@ -327,6 +341,11 @@ export const MostPopularSongs = styled.div`
       }
 
       .about-music {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+
         padding: 1rem 0;
         width: 100%;
         height: 100%;
@@ -360,6 +379,10 @@ export const MostPopularSongs = styled.div`
             display: none;
           }
         }
+
+        @media (max-width: 768px) {
+          align-items: center;
+        }
       }
 
       .player {
@@ -378,17 +401,26 @@ export const MostPopularSongs = styled.div`
           height: 100%;
           max-height: 3rem;
 
-          color: var(--black);
+          color: var(--beige-100);
 
           cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+          background: var(--beige-700);
+          border-radius: 0 1rem 1rem 0;
+
+          &:hover {
+            > svg {
+              color: var(--brand-red);
+            }
+          }
         }
       }
 
       @media (min-width: 768px) {
         &:nth-child(odd) {
-          border-style: solid;
-          border-width: 0.25rem 0;
-          border-color: var(--beige-500);
+          box-shadow: 0 0 0 0.25rem var(--beige-500) inset;
 
           .metadata {
             box-shadow: 0.25rem 0.25rem var(--brand-red);
