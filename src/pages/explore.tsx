@@ -17,7 +17,7 @@ const Explore: NextPage = () => {
     apiTop200BrazilDaily.then((response) => {
       setMusics(response.slice(0, 200));
     });
-  }, [musicsFilter]);
+  }, []);
 
   const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 

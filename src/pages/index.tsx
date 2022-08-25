@@ -17,7 +17,7 @@ const Home: NextPage = () => {
     apiTop200BrazilDaily.then((response) => {
       setMusics(response.slice(0, 10));
     });
-  }, [musicsFilter]);
+  }, []);
 
   function millisToMinutesAndSeconds(ms) {
     const date = new Date(ms);
