@@ -151,7 +151,7 @@ const Explore: NextPage = () => {
               <p>Estes foram os resultados para &quot;{search}&quot;.</p>
             </div>
             <ul>
-              {JSON.stringify(musicsResults)}
+              <p style={{textAlign: "center"}}>{JSON.stringify(musicsResults)}</p>
             </ul>
           </MostPopularSongs>}
       </main>
