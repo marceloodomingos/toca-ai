@@ -1,5 +1,6 @@
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
+import axios from "axios";
 import Header from "~/components/Header";
 
 import { Features, MostPopularSongs, Presentation } from "~/styles/pages/home";
