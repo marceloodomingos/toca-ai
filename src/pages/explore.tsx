@@ -115,4 +115,4 @@ const Explore: NextPage = () => {
   );
 };
 
-export default Home;
+export default Explore;
