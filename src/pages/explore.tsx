@@ -59,7 +59,7 @@ const Explore: NextPage = () => {
             <h1>Não encontrou o que queria?</h1>
             <p>Aqui você com certeza irá encontrar! Basta pesquisar as palavras chaves.</p>
           </div>
-          <input type="text" placeholder="Digite aqui..." onChange={(e) => {setSearch(e.target.value)}} />
+          <input type="text" placeholder="Digite aqui..." onChange={(e) => setSearch(e.target.value)} />
         </SearchContainer>
         {musics && (
           <MostPopularSongs ref={MostPopularSongsRef}>
