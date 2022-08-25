@@ -18,6 +18,9 @@ export const HeaderContainer = styled.header`
 
     width: 100%;
     max-width: 1400px;
+    height: 100%;
+
+    padding: 0 1rem;
 
     .logo {
       display: flex;
@@ -52,34 +55,33 @@ export const HeaderContainer = styled.header`
 
       gap: 0.5rem;
 
-      li {
+      > a {
         padding: 0.85rem 1.75rem;
 
-        cursor: pointer;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 0.95rem;
 
-        > a {
-          width: 100%;
-          height: 100%;
-
-          text-decoration: none;
-          font-weight: bold;
-          font-size: 0.95rem;
-
-          color: var(--brand-red);
-        }
+        color: var(--brand-red);
 
         &:last-child {
+          margin-left: 1rem;
+
+          color: var(--beige-500);
+
           background: var(--brand-red);
           border-radius: 0.5rem;
 
-          > a {
-            color: var(--beige-500);
-          }
+          padding: 0.85rem 1.5rem;
 
           &:hover {
             background: var(--brand-red-500);
           }
         }
+      }
+
+      @media (max-width: 768px) {
+        display: none;
       }
     }
   }

@@ -1,9 +1,37 @@
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Header from "~/components/Header";
+
 import { Features, MostPopularSongs, Presentation } from "~/styles/pages/home";
+import { useEffect, useRef, useState } from "react";
+import { apiTop200BrazilDaily } from "~/services/spotifyApi";
+import { Heart, MaskHappy, MusicNotesPlus, PlayCircle } from "phosphor-react";
+import axios from "axios";
+import Footer from "~/components/Footer";
+import Link from "next/link";
 
 const Home: NextPage = () => {
+  const [musics, setMusics] = useState([]);
+  const [musicsFilter, setMusicsFilter] = useState(10);
+
+  const MostPopularSongsRef = useRef(null);
+
+  useEffect(() => {
+    apiTop200BrazilDaily.then((response) => {
+      setMusics(response.slice(0, musicsFilter));
+    });
+  }, [musicsFilter]);
+
+  function millisToMinutesAndSeconds(ms) {
+    const date = new Date(ms);
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const seconds = date.getSeconds().toString().padStart(2, "0");
+
+    return { minutes, seconds };
+  }
+
+  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+
   return (
     <>
       <Head>
@@ -31,7 +59,7 @@ const Home: NextPage = () => {
           </div>
           <ul>
             <li>
-              <i>🎵</i>
+              <Heart />
               <span>Músicas de todos os gostos</span>
               <p>
                 Procure, encontre e escute o que e onde quiser. Sem
@@ -39,7 +67,7 @@ const Home: NextPage = () => {
               </p>
             </li>
             <li>
-              <i>🎼</i>
+              <MusicNotesPlus />
               <span>Descubra novos estilos</span>
               <p>
                 Nossos filtros estão disponíveis a todo momento para te ajudar
@@ -47,7 +75,7 @@ const Home: NextPage = () => {
               </p>
             </li>
             <li>
-              <i>🎶</i>
+              <MaskHappy />
               <span>Diversão com seus amigos</span>
               <p>
                 Com o <i>Music Party</i>, vocês podem aproveitar a mesma vibe
@@ -57,65 +85,145 @@ const Home: NextPage = () => {
           </ul>
         </Features>
 
-        <MostPopularSongs>
-          <div className="info">
-            <h1>As melhores do momento</h1>
-            <p>Top 10 músicas que o play nunca para.</p>
-          </div>
-          <ul>
-            <li>
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b27367c738a703dc979f5c3c52ef"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b27369d097c052406563778630a4"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2732dd9d9c0e4773dc0ba2d3104"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b273d7abe44151a87f1bb075dd25"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2739babf58f21e52d2835493a44"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b2731caa4ef8b96d6ae61b2254af"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b273dcef82b22983d040a659a9a0"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://i.scdn.co/image/ab67616d0000b273613e73a94823952ca9af5430"
-                alt=""
-              />
-            </li>
-            <li></li>
-            <li></li>
-          </ul>
-        </MostPopularSongs>
+        {musics && (
+          <MostPopularSongs ref={MostPopularSongsRef}>
+            <div className="info">
+              <h1>As melhores do momento</h1>
+              <p>Top 100 músicas que o play nunca para.</p>
+            </div>
+            <ul>
+              {musics.map((music, index) => {
+                return (
+                  <li
+                    key={index}
+                    id={music.trackMetadata.trackUri.replace(
+                      "spotify:track:",
+                      ""
+                    )}
+                  >
+                    <div className="metadata">
+                      <p>#{music.chartEntryData.currentRank}</p>
+                      <img
+                        src={music.trackMetadata.displayImageUri}
+                        alt={music.trackMetadata.trackName}
+                      />
+                    </div>
+                    <div className="about-music">
+                      <span>{music.trackMetadata.trackName}</span>
+                      <div className="artists">
+                        <p>
+                          <>
+                            {(() => {
+                              if (music.trackMetadata.artists.length > 0) {
+                                if (music.trackMetadata.artists.length === 1) {
+                                  return music.trackMetadata.artists[0].name;
+                                }
+
+                                if (music.trackMetadata.artists.length === 2) {
+                                  const artists =
+                                    music.trackMetadata.artists.map(
+                                      (artist) => {
+                                        return artist.name;
+                                      }
+                                    );
+
+                                  return artists.join(" e ");
+                                }
+
+                                if (music.trackMetadata.artists.length > 2) {
+                                  const artists =
+                                    music.trackMetadata.artists.map(
+                                      (artist) => {
+                                        return artist.name;
+                                      }
+                                    );
+
+                                  return artists.join(", ");
+                                }
+                              }
+                            })()}
+                          </>
+                        </p>
+                      </div>
+                    </div>
+                    <a
+                      className="player"
+                      href={`https://open.spotify.com/track/${music.trackMetadata.trackUri.replace(
+                        "spotify:track:",
+                        ""
+                      )}`}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <PlayCircle />
+                    </a>
+
+                    {/* <img
+                      src={music.track.album.images[1].url}
+                      alt={music.track.name}
+                    />
+                    <div className="about-music">
+                      <span>{music.track.name}</span>
+                      <div className="artists">
+                        {music.track.artists.length > 0 ? (
+                          music.track.artists.map((artist) => {
+                            return <p key={artist.name}>{artist.name}</p>;
+                          })
+                        ) : (
+                          <p>{music.track.artists[0].name}</p>
+                        )}
+                      </div>
+                      <div className="music-info">
+                        <p>
+                          {
+                            millisToMinutesAndSeconds(music.track.duration_ms)
+                              .minutes
+                          }
+                          :
+                          {
+                            millisToMinutesAndSeconds(music.track.duration_ms)
+                              .seconds
+                          }
+                        </p>
+                        <audio controls autoPlay>
+                          <source src={music.track.preview_url} />
+                        </audio>
+                      </div>
+                    </div> */}
+                  </li>
+                );
+              })}
+
+              {musicsFilter < 100 && (
+                <button
+                  onClick={() => {
+                    if (musicsFilter < 100) {
+                      setMusicsFilter(musicsFilter + 10);
+                    }
+                  }}
+                >
+                  Carregar mais...
+                </button>
+              )}
+
+              {musicsFilter > 10 && musicsFilter <= 100 && (
+                <button
+                  onClick={() => {
+                    if (musicsFilter > 10 && musicsFilter <= 100) {
+                      scrollToRef(MostPopularSongsRef);
+                      setMusicsFilter(10);
+                    }
+                  }}
+                >
+                  Mostrar menos
+                </button>
+              )}
+            </ul>
+          </MostPopularSongs>
+        )}
       </main>
+
+      <Footer />
     </>
   );
 };

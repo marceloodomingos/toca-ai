@@ -12,18 +12,18 @@ export default function Header() {
           </a>
         </Link>
         <ul className="navbar">
-          <li>
-            <a href="#">Início</a>
-          </li>
-          <li>
-            <a href="#">Sobre</a>
-          </li>
-          <li>
-            <a href="#">Contato</a>
-          </li>
-          <li>
-            <a href="#">Descubra sua vibe</a>
-          </li>
+          <Link href="/">
+            <a>Início</a>
+          </Link>
+          <Link href="/">
+            <a>Sobre nós</a>
+          </Link>
+          <Link href="/">
+            <a>Contato</a>
+          </Link>
+          <Link href="/">
+            <a>Descubra sua vibe</a>
+          </Link>
         </ul>
       </header>
     </HeaderContainer>

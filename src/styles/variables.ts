@@ -22,7 +22,7 @@ export const Variables = css`
     --gradient-transparent-beige-transparent: linear-gradient(
       to right,
       transparent,
-      var(--beige),
+      var(--beige-500),
       transparent
     );
   }
