@@ -27,21 +27,25 @@ const Explore: NextPage = () => {
 
   useEffect(() => {
     if (search) {
-      const getMusics = async () => {
-        const res = await axios.get(process.env.SEARCH_URL, { params: {
-          q: search,
-          type: 'multi',
-          offset: '0',
-          limit: '10',
-          numberOfTopResults: '5'
-        }, headers: {
-          'X-RapidAPI-Key': process.env.SEARCH_API_KEY,
-          'X-RapidAPI-Host': process.env.SEARCH_API_HOST,
-        }});
-        setMusicsResults(res.data);
-      }
+      const delayDebounce = setTimeout(() => {
+        const getMusics = async () => {
+          const res = await axios.get(process.env.SEARCH_URL, { params: {
+            q: search,
+            type: 'multi',
+            offset: '0',
+            limit: '10',
+            numberOfTopResults: '5'
+          }, headers: {
+            'X-RapidAPI-Key': process.env.SEARCH_API_KEY,
+            'X-RapidAPI-Host': process.env.SEARCH_API_HOST,
+          }});
+          setMusicsResults(res.data);
+        }
+    
+        getMusics();
+      }, 3000)
   
-      getMusics();
+      return () => clearTimeout(delayDebounce)
     }
   }, [search])
 
