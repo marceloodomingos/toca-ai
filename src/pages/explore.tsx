@@ -3,6 +3,7 @@ import Head from "next/head";
 import Header from "~/components/Header";
 
 import { Features, MostPopularSongs, Presentation } from "~/styles/pages/home";
+import { SearchContainer } from "~/styles/pages/explore";
 import { useEffect, useRef, useState } from "react";
 import { apiTop200BrazilDaily } from "~/services/spotifyApi";
 import { Heart, MaskHappy, MusicNotesPlus, PlayCircle } from "phosphor-react";

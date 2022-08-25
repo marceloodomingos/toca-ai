@@ -12,7 +12,7 @@ export const SearchContainer = styled.div`
     background: var(--beige-500);
 
     padding: 10rem 1rem;
-    gap: 5rem;
+    gap: 3rem;
     overflow: hidden;
 
     .info {
@@ -44,6 +44,7 @@ export const SearchContainer = styled.div`
         border-radius: 1rem;
 
         color: var(--brand-red);
+        font-size: 1rem;
 
         width: 100%;
         max-width: 1400px;
