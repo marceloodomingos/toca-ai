@@ -37,6 +37,7 @@ const Explore: NextPage = () => {
           'X-RapidAPI-Key': process.env.SEARCH_API_KEY,
           'X-RapidAPI-Host': process.env.SEARCH_API_HOST,
         }});
+        setMusics(null);
         setMusics(res.data);
       }
   
