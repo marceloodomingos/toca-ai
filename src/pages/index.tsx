@@ -157,7 +157,7 @@ const Home: NextPage = () => {
                   </li>
                 );
               })}
-              <a href="./explore">Descobrir mais...</a>
+              <Link href="./explore">Descobrir mais...</Link>
             </ul>
           </MostPopularSongs>
         )}
