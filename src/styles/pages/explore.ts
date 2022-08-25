@@ -43,12 +43,12 @@ export const SearchContainer = styled.div`
         border: 1px solid var(--brand-red);
         border-radius: 1rem;
 
-        padding: 1rem .5rem;
+        padding: .5rem 1rem;
         color: var(--brand-red);
         font-size: 1rem;
 
         width: 100%;
-        max-width: 650px;
+        max-width: 800px;
 
         &::placeholder {
             color: var(--black);
