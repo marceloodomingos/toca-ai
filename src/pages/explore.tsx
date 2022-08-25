@@ -12,7 +12,7 @@ import Footer from "~/components/Footer";
 
 const Explore: NextPage = () => {
   const [musics, setMusics] = useState([]);
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState("");
 
   const MostPopularSongsRef = useRef(null);
 
