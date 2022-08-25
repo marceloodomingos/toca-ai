@@ -148,7 +148,7 @@ const Explore: NextPage = () => {
         {search && <MostPopularSongs ref={MostPopularSongsRef}>
             <div className="info">
               <h1>Encontrou agora?</h1>
-              <p>Estes foram os resultados para "{search}".</p>
+              <p>Estes foram os resultados para &quot;{search}&quot;.</p>
             </div>
             <ul>
               {JSON.stringify(musicsResults)}
