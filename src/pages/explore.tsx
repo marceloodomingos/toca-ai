@@ -35,10 +35,9 @@ const Explore: NextPage = () => {
       }, headers: {
         'X-RapidAPI-Key': process.env.SEARCH_API_KEY,
         'X-RapidAPI-Host': process.env.SEARCH_API_HOST,
-      }}, );
-      const data = await res.json();
-      console.log(data);
-      setMusics(data);
+      }});
+      console.log(res);
+      // setMusics(data);
     }
 
     getMusics();
