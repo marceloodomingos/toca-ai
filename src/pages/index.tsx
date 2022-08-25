@@ -10,13 +10,12 @@ import Footer from "~/components/Footer";
 
 const Home: NextPage = () => {
   const [musics, setMusics] = useState([]);
-  const [musicsFilter, setMusicsFilter] = useState(10);
 
   const MostPopularSongsRef = useRef(null);
 
   useEffect(() => {
     apiTop200BrazilDaily.then((response) => {
-      setMusics(response.slice(0, musicsFilter));
+      setMusics(response.slice(0, 10));
     });
   }, [musicsFilter]);
 
@@ -155,67 +154,10 @@ const Home: NextPage = () => {
                     >
                       <PlayCircle />
                     </a>
-
-                    {/* <img
-                      src={music.track.album.images[1].url}
-                      alt={music.track.name}
-                    />
-                    <div className="about-music">
-                      <span>{music.track.name}</span>
-                      <div className="artists">
-                        {music.track.artists.length > 0 ? (
-                          music.track.artists.map((artist) => {
-                            return <p key={artist.name}>{artist.name}</p>;
-                          })
-                        ) : (
-                          <p>{music.track.artists[0].name}</p>
-                        )}
-                      </div>
-                      <div className="music-info">
-                        <p>
-                          {
-                            millisToMinutesAndSeconds(music.track.duration_ms)
-                              .minutes
-                          }
-                          :
-                          {
-                            millisToMinutesAndSeconds(music.track.duration_ms)
-                              .seconds
-                          }
-                        </p>
-                        <audio controls autoPlay>
-                          <source src={music.track.preview_url} />
-                        </audio>
-                      </div>
-                    </div> */}
                   </li>
                 );
               })}
-
-              {musicsFilter < 100 && (
-                <button
-                  onClick={() => {
-                    if (musicsFilter < 100) {
-                      setMusicsFilter(musicsFilter + 10);
-                    }
-                  }}
-                >
-                  Carregar mais...
-                </button>
-              )}
-
-              {musicsFilter > 10 && musicsFilter <= 100 && (
-                <button
-                  onClick={() => {
-                    if (musicsFilter > 10 && musicsFilter <= 100) {
-                      scrollToRef(MostPopularSongsRef);
-                      setMusicsFilter(10);
-                    }
-                  }}
-                >
-                  Mostrar menos
-                </button>
-              )}
+              <a href="./explore">Descobrir mais...</a>
             </ul>
           </MostPopularSongs>
         )}
