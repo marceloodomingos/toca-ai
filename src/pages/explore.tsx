@@ -62,7 +62,7 @@ const Explore: NextPage = () => {
           </div>
           <input type="text" placeholder="Digite aqui..." onChange={(e) => setSearch(e.target.value)} />
         </SearchContainer>
-        {musics && (
+        {musics && !search && (
           <MostPopularSongs ref={MostPopularSongsRef}>
             <div className="info">
               <h1>As melhores do momento</h1>
@@ -140,6 +140,7 @@ const Explore: NextPage = () => {
             </ul>
           </MostPopularSongs>
         )}
+        {search && JSON.stringify(musics)}
       </main>
 
       <Footer />
