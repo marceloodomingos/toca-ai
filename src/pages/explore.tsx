@@ -24,19 +24,23 @@ const Explore: NextPage = () => {
   }, [search]);
 
   useEffect(() => {
-    const res = await axios.get(process.env.SEARCH_URL, { params: {
-      q: search,
-      type: 'multi',
-      offset: '0',
-      limit: '10',
-      numberOfTopResults: '5'
-    }, headers: {
-      'X-RapidAPI-Key': process.env.SEARCH_API_KEY,
-      'X-RapidAPI-Host': process.env.SEARCH_API_HOST,
-    }}, );
-    const data = await res.json();
-    console.log(data);
-    setMusics(data);
+    const getMusics = async () => {
+      const res = await axios.get(process.env.SEARCH_URL, { params: {
+        q: search,
+        type: 'multi',
+        offset: '0',
+        limit: '10',
+        numberOfTopResults: '5'
+      }, headers: {
+        'X-RapidAPI-Key': process.env.SEARCH_API_KEY,
+        'X-RapidAPI-Host': process.env.SEARCH_API_HOST,
+      }}, );
+      const data = await res.json();
+      console.log(data);
+      setMusics(data);
+    }
+
+    getMusics();
   }, [search])
 
   const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
