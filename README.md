@@ -6,6 +6,7 @@ Com o <b>Toca aí</b>, a sua experiência musical fica mais descomplicada e dive
 
 ## Changelog
 
+- 0.0.2 - Top 100 músicas diárias no Brasil.
 - 0.0.1 - Ponta pé inicial do <b>Toca aí</b>.
 
 ## Desenvolvido por
