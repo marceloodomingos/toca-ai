@@ -17,7 +17,7 @@ export const HeaderContainer = styled.header`
     align-items: center;
 
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     height: 100%;
 
     padding: 0 1rem;
@@ -26,6 +26,9 @@ export const HeaderContainer = styled.header`
       display: flex;
       justify-content: center;
       align-items: center;
+
+      width: 100%;
+      max-width: 150px;
 
       gap: 0.5rem;
       text-decoration: none;
@@ -48,10 +51,11 @@ export const HeaderContainer = styled.header`
 
     .navbar {
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
 
       list-style: none;
+      width: 100%;
 
       /* gap: 0.5rem; */
 
@@ -63,8 +67,9 @@ export const HeaderContainer = styled.header`
         font-size: 0.95rem;
 
         color: var(--brand-red);
+        cursor: pointer;
 
-        &:last-child {
+        &.vibe {
           margin-left: 1rem;
 
           color: var(--beige-500);
@@ -72,12 +77,21 @@ export const HeaderContainer = styled.header`
           background: var(--brand-red);
           border-radius: 0.5rem;
 
-          padding: 0.85rem 1.5rem;
-
           &:hover {
             background: var(--brand-red-500);
           }
         }
+      }
+
+      > svg {
+        width: 100%;
+        max-width: 1.25rem;
+        height: 100%;
+
+        margin-left: 1rem;
+        cursor: pointer;
+
+        color: var(--brand-red);
       }
 
       @media (max-width: 900px) {

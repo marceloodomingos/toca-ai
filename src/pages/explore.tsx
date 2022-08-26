@@ -32,9 +32,7 @@ const Explore: NextPage = () => {
         setMusics(response.slice(0, 200));
       });
     }
-  }, [search]);
 
-  useEffect(() => {
     if (search && search.length > 0) {
       const delayDebounce = setTimeout(() => {
         const getMusics = async () => {

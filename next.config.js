@@ -16,6 +16,8 @@ module.exports = {
     TOP_200_TRACKS_API_KEY:
       "82a3952098mshd281f2297ff1909p18027ejsn601cd78f7fd9",
 
+    GET_PREVIEW_MUSIC_URL: "https://spotify23.p.rapidapi.com/tracks/",
+
     RANDOM_PLAYLIST_TRACKS_URL:
       "https://spotify23.p.rapidapi.com/playlist_tracks/",
     RANDOM_PLAYLIST_TRACKS_API_HOST: "spotify23.p.rapidapi.com",

@@ -1,16 +1,55 @@
-# Toca aí <img src="https://raw.githubusercontent.com/gelzinn/gelzinn/main/hi-emoji.gif" height="40px">
-### O player de música online mais útil do momento.
+<h1 align="center">👋 Toca aí 🎶</h1>
+<p align="center">O player de música online mais útil do momento.</p>
 
-Com o <b>Toca aí</b>, a sua experiência musical fica mais descomplicada e divertida, juntamente com seus amigos.
+<img src="https://img001.prntscr.com/file/img001/6vNu5vocQQe0Obrmp5QJ5A.png" alt="Cover Toca Aí" />
+
+<p align="center">Com o <b>Toca aí</b>, a sua experiência musical fica mais descomplicada e divertida.</p>
+
+ﾠ
 
 
-## Changelog
+# Conheça o 👋 Toca aí
 
-- 0.0.3 - Página "Explore".
+### Olá querido ouvinte! 🖐
+
+É incrível te ver por aqui! Sabemos o quanto você deve amar apreciar a primeira das 7 manifestações artísticas, nós também amamos!
+
+Exatamente por isso, seguindo essa ideia, o <b>👋 Toca aí</b> surgiu! Nossa missão é: facilitar a sua vida e enriquecê-la com músicas. Afinal, quem não ama passar o tempo escutando algo agradável ou até mesmo dançar um pouquinho?
+
+A música faz parte do nosso dia a dia e, com isso, preparamos um museu virtual dessa arte, que você pode explorar como quiser!
+
+ﾠ
+
+### Descomplicado e acessível. ☺
+
+Já parou pra pensar quantas vezes você foi pedir para algum amigo seu escutar alguma música com ou sem você e ele não conseguiu? Com nosso <i>"high five player"</i>, tudo fica bem mais fácil!
+
+Para ouvir alguma música na <b>Toca aí</b>, apenas acesse nosso site e aproveite. No entanto, mesmo que as músicas estejam limitadas apenas aos 30 segundos mais escutados, você não perde a experiência.
+
+Caso queira apreciar todo o conteúdo, basta o cadastro em nossa plataforma.
+
+ﾠ
+
+### A plataforma é paga? 😨
+
+Sempre visamos o acesso das músicas para todos e é isso que nós fazemos de melhor! Porém, como todo serviço, de <i>streaming</i> ou não, para nos mantermos em pé contribuindo com o bem-estar que a música transmite, alguns de nossos planos e algumas funções será necessário ser assinante de nosso plano <b><i>Give me five</i></b>, mas fique tranquilo, o valor é tão acessível quanto nosso propósito.
+
+Dessa maneira, você e seus amigos podem aproveitar da maneira que quiserem! A diversão é garantida.
+
+ﾠ
+
+
+# Outras informações
+
+Aqui você encontra toda a parte técnica do nosso trabalho.
+
+### Changelog
+
+- 0.0.3 - Página "Explorar".
 - 0.0.2 - Top 10 músicas diárias no Brasil logo após o início.
 - 0.0.1 - Ponta pé inicial do <b>Toca aí</b>.
 
-## Desenvolvido por
+### Desenvolvido por
 
 <i>Marcelo Augusto Domingos</i><br>
 

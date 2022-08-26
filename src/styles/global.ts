@@ -10,22 +10,23 @@ export const GlobalStyles = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 
     &::-webkit-scrollbar {
-        width: .75rem;
+      width: 1rem;
     }
 
     &::-webkit-scrollbar-track {
-        background: transparent;
+      background: var(--beige-500);
     }
 
     &::-webkit-scrollbar-thumb {
-        background: var(--beige);
+      background: var(--beige-700);
     }
   }
 
   body {
     -webkit-font-smoothing: antialiased;
-    background: var(--beige-100);
     overflow-x: hidden;
+    
+    background-color: var(--beige-100);
 
     &.menu-opened {
       height: 100vh;

@@ -8,7 +8,7 @@ export const FooterContainer = styled.footer`
 
   height: 100%;
   width: 100vw;
-  background: var(--beige-300);
+  background: var(--beige-500);
 
   padding: 3rem 0;
   gap: 1rem;

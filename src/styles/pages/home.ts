@@ -8,7 +8,7 @@ export const Presentation = styled.div`
 
   height: calc(100vh - 80px);
   width: 100%;
-  max-width: 1400px;
+  max-width: 1200px;
 
   margin: 0 auto;
   padding: 0 1rem;
@@ -27,6 +27,8 @@ export const Presentation = styled.div`
 
     width: 100%;
     max-width: 45%;
+
+    z-index: 2;
 
     > h1 {
       font-size: 5rem;
@@ -53,7 +55,7 @@ export const Presentation = styled.div`
       justify-content: center;
 
       text-decoration: none;
-      text-transform: capitalize;
+      /* text-transform: capitalize; */
       font-size: 1.25rem;
 
       gap: 1rem;
@@ -62,10 +64,18 @@ export const Presentation = styled.div`
       background: var(--brand-red);
       border-radius: 0.5rem;
       padding: 0.85rem 1.5rem;
+
+      &:hover {
+        background: var(--brand-red-500);
+      }
     }
 
     > p {
       font-size: 1.25rem;
+    }
+
+    @media (min-width: 1200px) {
+      padding-bottom: 80px;
     }
 
     @media (max-width: 1200px) {
@@ -95,8 +105,6 @@ export const Presentation = styled.div`
     }
 
     @media (max-width: 1200px) {
-      z-index: -1;
-
       right: -20%;
       bottom: -13%;
 
@@ -116,6 +124,8 @@ export const Presentation = styled.div`
         rgba(255, 255, 255, 0.05),
         black
       );
+
+      opacity: 0.5;
     }
 
     z-index: 0;
@@ -179,6 +189,29 @@ export const Features = styled.div`
     }
   }
 
+  > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+    text-transform: capitalize;
+    font-size: 1.25rem;
+
+    gap: 1rem;
+
+    color: var(--beige-500);
+    background: var(--brand-red);
+    border-radius: 0.5rem;
+    padding: 0.85rem 1.5rem;
+
+    cursor: pointer;
+
+    &:hover {
+      background: var(--brand-red-500);
+    }
+  }
+
   > ul {
     display: flex;
     flex-wrap: wrap;
@@ -188,7 +221,7 @@ export const Features = styled.div`
     gap: 1rem;
 
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
 
     list-style: none;
 
@@ -201,7 +234,7 @@ export const Features = styled.div`
       text-align: center;
       gap: 1rem;
 
-      flex-basis: calc(100% / 3.075);
+      flex-basis: calc(100% / 3.25);
 
       > svg {
         width: 100%;
@@ -241,7 +274,7 @@ export const MostPopularSongs = styled.div`
   align-items: center;
 
   height: 100%;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
 
   padding: 10rem 1rem;
@@ -523,6 +556,99 @@ export const MostPopularSongs = styled.div`
 
     @media (min-width: 768px) and (max-width: 1450px) {
       gap: 3rem;
+    }
+  }
+`;
+
+export const InviteFriend = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+
+  /* background: var(--beige-500); */
+  padding: 5rem 1rem;
+
+  overflow: hidden;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 10rem;
+
+    width: 100%;
+    max-width: 1200px;
+
+    > img {
+      width: 100%;
+      max-width: 450px;
+      height: 600px;
+
+      object-fit: cover;
+
+      pointer-events: none;
+      user-select: none;
+
+      @media (max-width: 768px) {
+        height: 50vh;
+
+        object-fit: cover;
+      }
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+
+      color: var(--brand-red);
+
+      gap: 1.5rem;
+
+      > h1 {
+        font-size: 3.5rem;
+        line-height: 80%;
+      }
+
+      > a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-decoration: none;
+        font-size: 1.25rem;
+
+        gap: 1rem;
+
+        color: var(--beige-500);
+        background: var(--brand-red);
+        border-radius: 0.5rem;
+        padding: 0.85rem 1.5rem;
+
+        cursor: pointer;
+
+        &:hover {
+          background: var(--brand-red-500);
+        }
+      }
+    }
+
+    @media (max-width: 1200px) {
+      flex-direction: column;
+      gap: 2rem;
+
+      > div {
+        text-align: center;
+
+        align-items: center;
+      }
     }
   }
 `;

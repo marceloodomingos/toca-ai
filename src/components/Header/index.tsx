@@ -1,7 +1,10 @@
 import Link from "next/link";
+import { MagnifyingGlass } from "phosphor-react";
 import { HeaderContainer } from "./styles";
 
 export default function Header() {
+  const currentLocation = location.pathname;
+
   return (
     <HeaderContainer>
       <header>
@@ -16,17 +19,19 @@ export default function Header() {
             <a>Início</a>
           </Link>
           <Link href="/">
-            <a>Sobre nós</a>
-          </Link>
-          <Link href="/">
             <a>Planos</a>
           </Link>
           <Link href="/">
             <a>Entrar na sua conta</a>
           </Link>
           <Link href="/">
-            <a>Descubra sua vibe</a>
+            <a className="vibe">Descubra sua vibe</a>
           </Link>
+          {currentLocation != "/explore" && (
+            <Link href="/explore">
+              <MagnifyingGlass weight="bold" />
+            </Link>
+          )}
         </ul>
       </header>
     </HeaderContainer>
