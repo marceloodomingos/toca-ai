@@ -156,15 +156,15 @@ export const Features = styled.div`
   justify-content: center;
   align-items: center;
 
+  position: relative;
+
   height: 100%;
   width: 100%;
-  margin: 0 auto;
+  margin: 2rem auto 0;
 
   background: var(--beige-500);
   padding: 10rem 1rem;
   gap: 5rem;
-
-  overflow: hidden;
 
   .info {
     display: flex;
@@ -224,6 +224,7 @@ export const Features = styled.div`
     max-width: 1200px;
 
     list-style: none;
+    z-index: 1;
 
     > li {
       display: flex;
@@ -265,6 +266,31 @@ export const Features = styled.div`
       }
     }
   }
+
+  &:before,
+  &:after {
+    content: "";
+    width: 35vw;
+    height: 50px;
+
+    background-color: var(--beige-700);
+
+    position: absolute;
+
+    z-index: 0;
+  }
+
+  &:before {
+    left: -10%;
+    bottom: -25px;
+    transform: skewX(-20deg);
+  }
+
+  &:after {
+    right: -10%;
+    top: -25px;
+    transform: skewX(20deg);
+  }
 `;
 
 export const MostPopularSongs = styled.div`
@@ -281,6 +307,7 @@ export const MostPopularSongs = styled.div`
   gap: 5rem;
 
   overflow: visible;
+  position: relative;
 
   .info {
     display: flex;
@@ -402,7 +429,7 @@ export const MostPopularSongs = styled.div`
         height: 100%;
 
         span {
-          font-size: 2rem;
+          font-size: 1.5rem;
           font-weight: bold;
 
           line-height: 100%;
@@ -416,7 +443,7 @@ export const MostPopularSongs = styled.div`
           width: 100%;
 
           > p {
-            font-size: 1.15rem;
+            font-size: 1rem;
             font-weight: 200;
           }
         }
@@ -613,8 +640,23 @@ export const InviteFriend = styled.div`
       gap: 1.5rem;
 
       > h1 {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
         font-size: 3.5rem;
         line-height: 80%;
+
+        width: 100%;
+        gap: 1rem;
+
+        > svg {
+          width: 100%;
+          max-width: 3rem;
+          height: 100%;
+
+          transform: rotate(-15deg);
+        }
       }
 
       > a {

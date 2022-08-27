@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-export const HeaderContainer = styled.header`
+interface HeaderProps {
+  white?: boolean;
+  glass?: boolean;
+}
+
+export const HeaderContainer = styled.header<HeaderProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,6 +15,9 @@ export const HeaderContainer = styled.header`
 
   width: 100%;
   height: 80px;
+  position: relative;
+
+  z-index: 10;
 
   header {
     display: flex;
@@ -37,15 +45,18 @@ export const HeaderContainer = styled.header`
         width: 100%;
         max-width: 2.5rem;
 
-        filter: invert(21%) sepia(24%) saturate(6973%) hue-rotate(350deg)
-          brightness(86%) contrast(82%);
+        filter: ${(props: HeaderProps) =>
+          props.white
+            ? "invert(100%) sepia(17%) saturate(0%) hue-rotate(35deg) brightness(450%) contrast(101%);"
+            : "invert(21%) sepia(24%) saturate(6973%) hue-rotate(350deg) brightness(86%) contrast(82%);"};
       }
 
       span {
         font-size: 1.5rem;
         font-weight: bold;
         text-transform: uppercase;
-        color: var(--brand-red);
+        color: ${(props: HeaderProps) =>
+          props.white ? "var(--white)" : "var(--brand-red)"};
       }
     }
 
@@ -66,19 +77,23 @@ export const HeaderContainer = styled.header`
         font-weight: bold;
         font-size: 0.95rem;
 
-        color: var(--brand-red);
+        color: ${(props: HeaderProps) =>
+          props.white ? "var(--white)" : "var(--brand-red)"};
         cursor: pointer;
 
         &.vibe {
           margin-left: 1rem;
 
-          color: var(--beige-500);
+          color: ${(props: HeaderProps) =>
+            props.white ? "var(--black)" : "var(--beige-100)"};
 
-          background: var(--brand-red);
+          background: ${(props: HeaderProps) =>
+            props.white ? "#FEFEFE" : "var(--brand-red)"};
           border-radius: 0.5rem;
 
           &:hover {
-            background: var(--brand-red-500);
+            background: ${(props: HeaderProps) =>
+              props.white ? "var(--white)" : "var(--brand-red-500)"};
           }
         }
       }
@@ -91,7 +106,8 @@ export const HeaderContainer = styled.header`
         margin-left: 1rem;
         cursor: pointer;
 
-        color: var(--brand-red);
+        color: ${(props: HeaderProps) =>
+          props.white ? "var(--white)" : "var(--brand-red)"};
       }
 
       @media (max-width: 900px) {

@@ -21,6 +21,11 @@ export const SearchContainer = styled.div`
     justify-content: center;
     align-items: center;
 
+    text-align: center;
+
+    width: 100%;
+    max-width: 1200px;
+
     color: var(--brand-red);
 
     > h1 {

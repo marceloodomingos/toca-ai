@@ -386,7 +386,7 @@ const Explore: NextPage = () => {
         )}
         <SearchContainer>
           <div className="info">
-            <h1>Ainda não encontrou?</h1>
+            <h1>Não encontrou?</h1>
             <p>
               Que pena que nossos filtros não ajudaram tanto assim de primeira.
               Você pode tentar ser mais específico ou pesquisar por palavras

@@ -5,7 +5,7 @@ export const Variables = css`
     // main colors
     --background: var(--beige-100);
     --white: #efefef;
-    --black: #000111;
+    --black: black;
 
     --beige: #d9cfab;
     --beige-100: #f7f0d8;

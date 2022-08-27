@@ -1,11 +1,15 @@
 import Link from "next/link";
 import { FooterContainer } from "./styles";
 
-export default function Footer() {
+interface FooterProps {
+  dark?: boolean;
+}
+
+export default function Footer({ dark }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <FooterContainer>
+    <FooterContainer dark={dark}>
       <Link href="/">
         <a className="logo">
           <img src="../../images/hi-emoji.gif" alt="" />

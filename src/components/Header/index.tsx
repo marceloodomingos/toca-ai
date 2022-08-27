@@ -2,11 +2,16 @@ import Link from "next/link";
 import { MagnifyingGlass } from "phosphor-react";
 import { HeaderContainer } from "./styles";
 
-export default function Header() {
+interface HeaderProps {
+  white?: boolean;
+  glass?: boolean;
+}
+
+export default function Header({ glass, white }: HeaderProps) {
   const currentLocation = location.pathname;
 
   return (
-    <HeaderContainer>
+    <HeaderContainer white={white}>
       <header>
         <Link href="/">
           <a className="logo">

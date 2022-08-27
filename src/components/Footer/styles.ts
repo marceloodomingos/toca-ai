@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const FooterContainer = styled.footer`
+interface FooterProps {
+  dark?: boolean;
+}
+
+export const FooterContainer = styled.footer<FooterProps>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,10 +12,14 @@ export const FooterContainer = styled.footer`
 
   height: 100%;
   width: 100vw;
-  background: var(--beige-500);
+  background: ${(props: FooterProps) =>
+    props.dark ? "var(--black)" : "var(--beige-500)"};
 
   padding: 3rem 0;
   gap: 1rem;
+
+  color: ${(props: FooterProps) =>
+    props.dark ? "var(--white)" : "var(--black)"};
 
   .logo {
     display: flex;
@@ -25,8 +33,10 @@ export const FooterContainer = styled.footer`
       width: 100%;
       max-width: 5rem;
 
-      filter: invert(21%) sepia(24%) saturate(6973%) hue-rotate(350deg)
-        brightness(86%) contrast(82%);
+      filter: ${(props: FooterProps) =>
+        props.dark
+          ? "invert(100%) sepia(17%) saturate(0%) hue-rotate(35deg) brightness(450%) contrast(101%);"
+          : "invert(21%) sepia(24%) saturate(6973%) hue-rotate(350deg) brightness(86%) contrast(82%);"};
     }
   }
 `;

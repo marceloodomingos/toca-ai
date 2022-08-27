@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Header from "~/components/Header";
@@ -13,35 +13,29 @@ import { useEffect, useRef, useState } from "react";
 import { apiTop200BrazilDaily } from "~/services/spotifyApi";
 import {
   ArrowRight,
+  Headphones,
   Heart,
   MaskHappy,
   MusicNotesPlus,
   PlayCircle,
 } from "phosphor-react";
 import Footer from "~/components/Footer";
-import axios from "axios";
 
-const Home: NextPage = () => {
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await apiTop200BrazilDaily;
+
+  return { props: { musicsList: data || null } };
+};
+
+const Home: NextPage = ({ musicsList }: any) => {
   const [musics, setMusics] = useState([]);
   const [musicsUri, setMusicsUri] = useState({});
 
-  const MostPopularSongsRef = useRef(null);
-
   useEffect(() => {
-    apiTop200BrazilDaily.then((response) => {
-      setMusics(response.slice(0, 10));
-    });
-  }, []);
-
-  function millisToMinutesAndSeconds(ms) {
-    const date = new Date(ms);
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-    const seconds = date.getSeconds().toString().padStart(2, "0");
-
-    return { minutes, seconds };
-  }
-
-  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+    if (musicsList) {
+      setMusics(musicsList.slice(0, 10));
+    }
+  }, [musicsList]);
 
   return (
     <>
@@ -102,7 +96,7 @@ const Home: NextPage = () => {
         </Features>
 
         {musics && (
-          <MostPopularSongs ref={MostPopularSongsRef}>
+          <MostPopularSongs>
             <div className="info">
               <h1>Bombando no Brasil</h1>
               <p>As músicas diárias em que o play não para.</p>
@@ -110,6 +104,11 @@ const Home: NextPage = () => {
             <ul>
               <>
                 {musics.map((music, index) => {
+                  // setMusicsUri({
+                  //   ...musicsUri,
+                  //   index: music.trackMetadata.trackUri,
+                  // });
+
                   // const getMusics = async () => {
                   //   if (music.trackMetadata.trackUri) {
                   //     const res = await axios.get(
@@ -131,6 +130,8 @@ const Home: NextPage = () => {
                   //     console.log(res.data.tracks[0].preview_url);
                   //   }
                   // };
+
+                  console.log(musicsUri);
 
                   return (
                     <li
@@ -215,6 +216,7 @@ const Home: NextPage = () => {
           <div className="container">
             <div>
               <h1>
+                <Headphones />
                 <i>Music Party</i>
               </h1>
               <p>
