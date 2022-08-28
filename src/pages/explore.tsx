@@ -107,7 +107,10 @@ const Explore: NextPage = () => {
                     )}
                   >
                     <div className="metadata">
-                      <p>#{music.chartEntryData.currentRank}</p>
+                      <p>
+                        <i>#</i>
+                        {music.chartEntryData.currentRank}
+                      </p>
                       <img
                         src={music.trackMetadata.displayImageUri}
                         alt={music.trackMetadata.trackName}

@@ -291,6 +291,10 @@ export const Features = styled.div`
     top: -25px;
     transform: skewX(20deg);
   }
+
+  @media (max-width: 1200px) {
+    margin: 0 auto;
+  }
 `;
 
 export const MostPopularSongs = styled.div`
@@ -367,8 +371,8 @@ export const MostPopularSongs = styled.div`
 
         > img {
           width: 100%;
-          max-width: 200px;
-          min-width: 200px;
+          max-width: 250px;
+          /* min-width: 200px; */
 
           border-radius: 0.25rem;
 
@@ -389,14 +393,19 @@ export const MostPopularSongs = styled.div`
 
           background: var(--beige-500);
           color: var(--brand-red);
-          /* -webkit-text-stroke: 0.25rem var(--brand-red); */
+          /* -webkit-text-stroke: 0.5rem var(--brand-red); */
 
           z-index: 2;
 
+          > i {
+            margin-top: -0.5rem;
+            font-size: 1rem;
+          }
+
           @media (min-width: 1450px) {
-            width: 5rem;
-            height: 5rem;
-            font-size: 2rem;
+            width: 4rem;
+            height: 4rem;
+            font-size: 1.5rem;
 
             top: 50%;
             left: 0%;
@@ -529,20 +538,38 @@ export const MostPopularSongs = styled.div`
         flex-direction: column;
         align-items: center;
 
+        background: var(--beige-500);
+        max-width: 400px;
+
         gap: 0;
 
         .metadata {
           box-shadow: 0 0.35rem var(--brand-red);
           border-radius: 0.25rem;
 
+          width: 100%;
+
           > img {
-            max-width: 500px;
+            max-width: unset;
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+          }
+
+          > p {
+            bottom: -10%;
+            border: 0.25rem solid var(--brand-red);
+
+            > i {
+              margin-top: unset;
+            }
           }
         }
 
         .about-music {
           text-align: center;
-          padding: 4rem 1rem 1rem;
+          padding: 3rem 1rem 1rem;
 
           > span {
             font-size: 1.25rem;
@@ -555,6 +582,13 @@ export const MostPopularSongs = styled.div`
           .artists {
             justify-content: center;
           }
+        }
+
+        .player {
+          width: 100%;
+          max-width: unset;
+
+          padding: 0 0 1rem;
         }
       }
     }
@@ -583,6 +617,10 @@ export const MostPopularSongs = styled.div`
 
     @media (min-width: 768px) and (max-width: 1450px) {
       gap: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      justify-content: center;
     }
   }
 `;

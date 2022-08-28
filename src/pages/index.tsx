@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Home: NextPage = ({ musicsList }: any) => {
   const [musics, setMusics] = useState([]);
-  const [musicsUri, setMusicsUri] = useState({});
+  const [musicsUri, setMusicsUri] = useState([]);
 
   useEffect(() => {
     if (musicsList) {
@@ -104,10 +104,23 @@ const Home: NextPage = ({ musicsList }: any) => {
             <ul>
               <>
                 {musics.map((music, index) => {
-                  // setMusicsUri({
-                  //   ...musicsUri,
-                  //   index: music.trackMetadata.trackUri,
-                  // });
+                  // setMusicsUri((prev) => [
+                  //   ...prev,
+                  //   music.trackMetadata.trackUri.replace("spotify:track:", ""),
+                  // ]);
+
+                  // setMusicsUri(
+                  //   (map) =>
+                  //     new Map(
+                  //       map.set(
+                  //         index,
+                  //         music.trackMetadata.trackUri.replace(
+                  //           "spotify:track:",
+                  //           ""
+                  //         )
+                  //       )
+                  //     )
+                  // );
 
                   // const getMusics = async () => {
                   //   if (music.trackMetadata.trackUri) {
@@ -142,7 +155,10 @@ const Home: NextPage = ({ musicsList }: any) => {
                       )}
                     >
                       <div className="metadata">
-                        <p>#{music.chartEntryData.currentRank}</p>
+                        <p>
+                          <i>#</i>
+                          {music.chartEntryData.currentRank}
+                        </p>
                         <img
                           src={music.trackMetadata.displayImageUri}
                           alt={music.trackMetadata.trackName}

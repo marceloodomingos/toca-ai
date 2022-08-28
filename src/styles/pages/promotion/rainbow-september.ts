@@ -1,4 +1,13 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const revealBanner = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 export const RainbowSeptemberWelcome = styled.div`
   width: 100vw;
@@ -21,10 +30,19 @@ export const RainbowSeptemberWelcome = styled.div`
     color: white;
 
     z-index: 2;
-    padding-bottom: 80px;
+    padding: 0 1rem 80px;
+
+    text-align: center;
 
     > h1 {
       font-size: 4rem;
+      line-height: 80%;
+
+      margin-bottom: 1rem;
+
+      @media (max-width: 768px) {
+        font-size: 3rem;
+      }
     }
 
     > a {
@@ -46,6 +64,11 @@ export const RainbowSeptemberWelcome = styled.div`
       &:hover {
         background: var(--white);
       }
+
+      @media (max-width: 768px) {
+        font-size: 1rem;
+        padding: 0.85rem 3rem;
+      }
     }
   }
 
@@ -60,10 +83,12 @@ export const RainbowSeptemberWelcome = styled.div`
 
     filter: brightness(35%);
 
-    mask-image: linear-gradient(to top, transparent 0%, black 100%);
+    mask-image: linear-gradient(#0000 0%, #000 25%, #0000 95%);
     z-index: 0;
 
     pointer-events: none;
     user-select: none;
+
+    animation: ${revealBanner} 2s ease;
   }
 `;
