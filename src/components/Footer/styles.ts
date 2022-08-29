@@ -37,6 +37,9 @@ export const FooterContainer = styled.footer<FooterProps>`
         props.dark
           ? "invert(100%) sepia(17%) saturate(0%) hue-rotate(35deg) brightness(450%) contrast(101%);"
           : "invert(21%) sepia(24%) saturate(6973%) hue-rotate(350deg) brightness(86%) contrast(82%);"};
+
+      pointer-events: none;
+      user-select: none;
     }
   }
 `;

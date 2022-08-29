@@ -1,9 +1,12 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { ArrowRight } from "phosphor-react";
+import { ArrowRight, Headphones } from "phosphor-react";
 import Footer from "~/components/Footer";
 import Header from "~/components/Header";
-import { RainbowSeptemberWelcome } from "~/styles/pages/promotion/rainbow-september";
+import {
+  RainbowSeptemberPresentation,
+  RainbowSeptemberWelcome,
+} from "~/styles/pages/promotion/rainbow-september";
 
 const RainbowSeptember: NextPage = () => {
   return (
@@ -18,7 +21,8 @@ const RainbowSeptember: NextPage = () => {
           <div className="info">
             <h1>Aproveite a chuva de cores!</h1>
             <p>
-              Muito mais por muito menos. Deixe sua playlist super colorida!
+              Deixe sua playlist super colorida e recheada com o{" "}
+              <i>Rainbow September</i>.
             </p>
             <a href="">
               Saiba mais <ArrowRight />
@@ -29,6 +33,24 @@ const RainbowSeptember: NextPage = () => {
             alt="Rainbow Goldfish"
           />
         </RainbowSeptemberWelcome>
+        <RainbowSeptemberPresentation>
+          <div className="container">
+            <div>
+              <h1>Aproveite e relaxe.</h1>
+              <p>
+                Uma imensidão de músicas. Muito mais por muito menos. Tudo da
+                forma que você quiser, exatamente do seu jeitinho.
+              </p>
+              <a target="_blank" rel="noreferrer">
+                Ver mais <ArrowRight />
+              </a>
+            </div>
+            <img
+              src="../../images/listening-happy-music-whitout-bg.svg"
+              alt="Holding an smartphone"
+            />
+          </div>
+        </RainbowSeptemberPresentation>
       </main>
       <Footer dark />
     </>

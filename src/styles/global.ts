@@ -14,11 +14,11 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     &::-webkit-scrollbar-track {
-      background: var(--beige-500);
+      background: #FEFEFE;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: var(--beige-700);
+      background: var(--white);
     }
   }
 

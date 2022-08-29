@@ -20,6 +20,7 @@ import {
   PlayCircle,
 } from "phosphor-react";
 import Footer from "~/components/Footer";
+import LoadingEllipsis from "~/components/Loading/LoadingEllipsis";
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await apiTop200BrazilDaily;
@@ -96,136 +97,151 @@ const Home: NextPage = ({ musicsList }: any) => {
         </Features>
 
         {musics && (
-          <MostPopularSongs>
-            <div className="info">
-              <h1>Bombando no Brasil</h1>
-              <p>As músicas diárias em que o play não para.</p>
-            </div>
-            <ul>
-              <>
-                {musics.map((music, index) => {
-                  // setMusicsUri((prev) => [
-                  //   ...prev,
-                  //   music.trackMetadata.trackUri.replace("spotify:track:", ""),
-                  // ]);
+          <>
+            {musics.length > 0 ? (
+              <MostPopularSongs>
+                <div className="info">
+                  <h1>Bombando no Brasil</h1>
+                  <p>As músicas diárias em que o play não para.</p>
+                </div>
+                <ul>
+                  <>
+                    {musics.map((music, index) => {
+                      // setMusicsUri((prev) => [
+                      //   ...prev,
+                      //   music.trackMetadata.trackUri.replace("spotify:track:", ""),
+                      // ]);
 
-                  // setMusicsUri(
-                  //   (map) =>
-                  //     new Map(
-                  //       map.set(
-                  //         index,
-                  //         music.trackMetadata.trackUri.replace(
-                  //           "spotify:track:",
-                  //           ""
-                  //         )
-                  //       )
-                  //     )
-                  // );
+                      // setMusicsUri(
+                      //   (map) =>
+                      //     new Map(
+                      //       map.set(
+                      //         index,
+                      //         music.trackMetadata.trackUri.replace(
+                      //           "spotify:track:",
+                      //           ""
+                      //         )
+                      //       )
+                      //     )
+                      // );
 
-                  // const getMusics = async () => {
-                  //   if (music.trackMetadata.trackUri) {
-                  //     const res = await axios.get(
-                  //       process.env.GET_PREVIEW_MUSIC_URL,
-                  //       {
-                  //         params: {
-                  //           ids: music.trackMetadata.trackUri.replace(
-                  //             "spotify:track:",
-                  //             ""
-                  //           ),
-                  //         },
-                  //         headers: {
-                  //           "X-RapidAPI-Key": process.env.SEARCH_API_KEY,
-                  //           "X-RapidAPI-Host": process.env.SEARCH_API_HOST,
-                  //         },
-                  //       }
-                  //     );
+                      // const getMusics = async () => {
+                      //   if (music.trackMetadata.trackUri) {
+                      //     const res = await axios.get(
+                      //       process.env.GET_PREVIEW_MUSIC_URL,
+                      //       {
+                      //         params: {
+                      //           ids: music.trackMetadata.trackUri.replace(
+                      //             "spotify:track:",
+                      //             ""
+                      //           ),
+                      //         },
+                      //         headers: {
+                      //           "X-RapidAPI-Key": process.env.SEARCH_API_KEY,
+                      //           "X-RapidAPI-Host": process.env.SEARCH_API_HOST,
+                      //         },
+                      //       }
+                      //     );
 
-                  //     console.log(res.data.tracks[0].preview_url);
-                  //   }
-                  // };
+                      //     console.log(res.data.tracks[0].preview_url);
+                      //   }
+                      // };
 
-                  console.log(musicsUri);
+                      return (
+                        <li
+                          key={index}
+                          id={music.trackMetadata.trackUri.replace(
+                            "spotify:track:",
+                            ""
+                          )}
+                        >
+                          <div className="metadata">
+                            <p>
+                              <i>#</i>
+                              {music.chartEntryData.currentRank}
+                            </p>
+                            <img
+                              src={music.trackMetadata.displayImageUri}
+                              alt={music.trackMetadata.trackName}
+                            />
+                          </div>
+                          <div className="about-music">
+                            <span>{music.trackMetadata.trackName}</span>
+                            <div className="artists">
+                              <p>
+                                <>
+                                  {(() => {
+                                    if (
+                                      music.trackMetadata.artists.length > 0
+                                    ) {
+                                      if (
+                                        music.trackMetadata.artists.length === 1
+                                      ) {
+                                        return music.trackMetadata.artists[0]
+                                          .name;
+                                      }
 
-                  return (
-                    <li
-                      key={index}
-                      id={music.trackMetadata.trackUri.replace(
-                        "spotify:track:",
-                        ""
-                      )}
-                    >
-                      <div className="metadata">
-                        <p>
-                          <i>#</i>
-                          {music.chartEntryData.currentRank}
-                        </p>
-                        <img
-                          src={music.trackMetadata.displayImageUri}
-                          alt={music.trackMetadata.trackName}
-                        />
-                      </div>
-                      <div className="about-music">
-                        <span>{music.trackMetadata.trackName}</span>
-                        <div className="artists">
-                          <p>
-                            <>
-                              {(() => {
-                                if (music.trackMetadata.artists.length > 0) {
-                                  if (
-                                    music.trackMetadata.artists.length === 1
-                                  ) {
-                                    return music.trackMetadata.artists[0].name;
-                                  }
+                                      if (
+                                        music.trackMetadata.artists.length === 2
+                                      ) {
+                                        const artists =
+                                          music.trackMetadata.artists.map(
+                                            (artist) => {
+                                              return artist.name;
+                                            }
+                                          );
 
-                                  if (
-                                    music.trackMetadata.artists.length === 2
-                                  ) {
-                                    const artists =
-                                      music.trackMetadata.artists.map(
-                                        (artist) => {
-                                          return artist.name;
-                                        }
-                                      );
+                                        return artists.join(" e ");
+                                      }
 
-                                    return artists.join(" e ");
-                                  }
+                                      if (
+                                        music.trackMetadata.artists.length > 2
+                                      ) {
+                                        const artists =
+                                          music.trackMetadata.artists.map(
+                                            (artist) => {
+                                              return artist.name;
+                                            }
+                                          );
 
-                                  if (music.trackMetadata.artists.length > 2) {
-                                    const artists =
-                                      music.trackMetadata.artists.map(
-                                        (artist) => {
-                                          return artist.name;
-                                        }
-                                      );
-
-                                    return artists.join(", ");
-                                  }
-                                }
-                              })()}
-                            </>
-                          </p>
-                        </div>
-                      </div>
-                      <a
-                        className="player"
-                        href={`https://open.spotify.com/track/${music.trackMetadata.trackUri.replace(
-                          "spotify:track:",
-                          ""
-                        )}`}
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        <PlayCircle />
-                      </a>
-                    </li>
-                  );
-                })}
-                <Link href="./explore">
-                  <button>Descobrir mais...</button>
-                </Link>
-              </>
-            </ul>
-          </MostPopularSongs>
+                                        return artists.join(", ");
+                                      }
+                                    }
+                                  })()}
+                                </>
+                              </p>
+                            </div>
+                          </div>
+                          <a
+                            className="player"
+                            href={`https://open.spotify.com/track/${music.trackMetadata.trackUri.replace(
+                              "spotify:track:",
+                              ""
+                            )}`}
+                            rel="noreferrer"
+                            target="_blank"
+                          >
+                            <PlayCircle />
+                          </a>
+                        </li>
+                      );
+                    })}
+                    <Link href="./explore">
+                      <button>Descobrir mais...</button>
+                    </Link>
+                  </>
+                </ul>
+              </MostPopularSongs>
+            ) : (
+              <MostPopularSongs>
+                <div className="info">
+                  <h1>Bombando no Brasil</h1>
+                  <p>As músicas diárias em que o play não para.</p>
+                </div>
+                <LoadingEllipsis />
+              </MostPopularSongs>
+            )}
+          </>
         )}
 
         <InviteFriend>
