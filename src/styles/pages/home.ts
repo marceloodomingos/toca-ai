@@ -246,8 +246,10 @@ export const Features = styled.div`
       }
 
       > span {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
         font-weight: bold;
+
+        line-height: 100%;
       }
     }
 
@@ -269,26 +271,33 @@ export const Features = styled.div`
 
   &:before,
   &:after {
+    --lines-height: 75px;
+    --lines-posiiton: -75px;
+
     content: "";
     width: 35vw;
-    height: 50px;
+    height: var(--lines-height);
 
     background-color: var(--beige-700);
 
     position: absolute;
 
     z-index: 0;
+
+    @media (max-width: 768px) {
+      width: 50vw;
+    }
   }
 
   &:before {
     left: -10%;
-    bottom: -25px;
+    bottom: calc(var(--lines-posiiton) / 2 + 0.25rem);
     transform: skewX(-20deg);
   }
 
   &:after {
     right: -10%;
-    top: -25px;
+    top: calc(var(--lines-posiiton) / 2 - 0.25rem);
     transform: skewX(20deg);
   }
 
@@ -400,6 +409,8 @@ export const MostPopularSongs = styled.div`
           > i {
             margin-top: -0.5rem;
             font-size: 1rem;
+
+            font-weight: normal;
           }
 
           @media (min-width: 1450px) {
@@ -549,6 +560,8 @@ export const MostPopularSongs = styled.div`
 
           width: 100%;
 
+          margin-bottom: 2.75rem;
+
           > img {
             max-width: unset;
             width: 100%;
@@ -569,7 +582,7 @@ export const MostPopularSongs = styled.div`
 
         .about-music {
           text-align: center;
-          padding: 3rem 1rem 1rem;
+          padding: 0 1rem;
 
           > span {
             font-size: 1.25rem;
@@ -588,7 +601,15 @@ export const MostPopularSongs = styled.div`
           width: 100%;
           max-width: unset;
 
-          padding: 0 0 1rem;
+          padding: 1rem 0;
+        }
+      }
+
+      @media (max-width: 500px) {
+        max-width: 80%;
+
+        .metadata > img {
+          object-fit: contain;
         }
       }
     }

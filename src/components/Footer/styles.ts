@@ -31,7 +31,7 @@ export const FooterContainer = styled.footer<FooterProps>`
 
     img {
       width: 100%;
-      max-width: 5rem;
+      max-width: 2.5rem;
 
       filter: ${(props: FooterProps) =>
         props.dark

@@ -12,7 +12,7 @@ export default function Footer({ dark }: FooterProps) {
     <FooterContainer dark={dark}>
       <Link href="/">
         <a className="logo">
-          <img src="../../images/hi-emoji.gif" alt="" />
+          <img src="../../logos/logo2.png" alt="Toca Aí logo" />
         </a>
       </Link>
       <p>

@@ -262,7 +262,7 @@ const Home: NextPage = ({ musicsList }: any) => {
                 target="_blank"
                 rel="noreferrer"
               >
-                Convidar para cumprimento <ArrowRight />
+                Dar um toque <ArrowRight />
               </a>
             </div>
             <img

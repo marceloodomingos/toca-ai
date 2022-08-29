@@ -28,8 +28,8 @@ export default function Header({ glass, white }: HeaderProps) {
         <nav>
           <Link href="/">
             <a className="logo">
-              <img src="../../images/hi-emoji.gif" alt="" />
-              <span>Toca ai</span>
+              <img src="../../logos/logo2.png" alt="Toca Aí logo" />
+              <span>Toca aí</span>
             </a>
           </Link>
           <ul className="navbar">
@@ -42,7 +42,7 @@ export default function Header({ glass, white }: HeaderProps) {
             <Link href="/">
               <a>Entrar na sua conta</a>
             </Link>
-            <Link href="/">
+            <Link href="/your-vibe">
               <a className="vibe">Descubra sua vibe</a>
             </Link>
             {currentLocation != "/explore" && (

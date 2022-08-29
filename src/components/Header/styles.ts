@@ -58,6 +58,10 @@ export const HeaderContainer = styled.header<HeaderProps>`
         text-transform: uppercase;
         color: ${(props: HeaderProps) =>
           props.white ? "var(--white)" : "var(--brand-red)"};
+
+        @media (max-width: 500px) {
+          display: none;
+        }
       }
     }
 
