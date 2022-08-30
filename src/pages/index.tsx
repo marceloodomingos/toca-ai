@@ -146,93 +146,97 @@ const Home: NextPage = ({ musicsList }: any) => {
                   <>
                     {musics.map((music, index) => {
                       return (
-                        <li
-                          key={index}
-                          id={music.trackMetadata.trackUri.replace(
-                            "spotify:track:",
-                            ""
-                          )}
-                        >
-                          <div className="metadata">
-                            <p>
-                              <i>#</i>
-                              {music.chartEntryData.currentRank}
-                            </p>
-                            <img
-                              src={music.trackMetadata.displayImageUri}
-                              alt={music.trackMetadata.trackName}
-                            />
-                          </div>
-                          <div className="about-music">
-                            <span>{music.trackMetadata.trackName}</span>
-                            <div className="artists">
-                              <p>
-                                <>
-                                  {(() => {
-                                    if (
-                                      music.trackMetadata.artists.length > 0
-                                    ) {
-                                      if (
-                                        music.trackMetadata.artists.length === 1
-                                      ) {
-                                        return music.trackMetadata.artists[0]
-                                          .name;
-                                      }
-
-                                      if (
-                                        music.trackMetadata.artists.length === 2
-                                      ) {
-                                        const artists =
-                                          music.trackMetadata.artists.map(
-                                            (artist) => {
-                                              return artist.name;
-                                            }
-                                          );
-
-                                        return artists.join(" e ");
-                                      }
-
-                                      if (
-                                        music.trackMetadata.artists.length > 2
-                                      ) {
-                                        const artists =
-                                          music.trackMetadata.artists.map(
-                                            (artist) => {
-                                              return artist.name;
-                                            }
-                                          );
-
-                                        return artists.join(", ");
-                                      }
-                                    }
-                                  })()}
-                                </>
-                              </p>
-                            </div>
-                          </div>
-                          <button
-                            className="player"
-                            // href={`https://open.spotify.com/track/${music.trackMetadata.trackUri.replace(
-                            //   "spotify:track:",
-                            //   ""
-                            // )}`}
+                        <Link key={index} href={music.trackMetadata.trackUri.replace(
+                          "spotify:track:",
+                          ""
+                        )}>
+                          <li
+                            id={music.trackMetadata.trackUri.replace(
+                              "spotify:track:",
+                              ""
+                            )}
                           >
-                            <PlayCircle />
-                            {musicsUri.map((preview_url) => {
-                              console.log(preview_url);
+                            <div className="metadata">
+                              <p>
+                                <i>#</i>
+                                {music.chartEntryData.currentRank}
+                              </p>
+                              <img
+                                src={music.trackMetadata.displayImageUri}
+                                alt={music.trackMetadata.trackName}
+                              />
+                            </div>
+                            <div className="about-music">
+                              <span>{music.trackMetadata.trackName}</span>
+                              <div className="artists">
+                                <p>
+                                  <>
+                                    {(() => {
+                                      if (
+                                        music.trackMetadata.artists.length > 0
+                                      ) {
+                                        if (
+                                          music.trackMetadata.artists.length === 1
+                                        ) {
+                                          return music.trackMetadata.artists[0]
+                                            .name;
+                                        }
 
-                              if (
-                                preview_url === music.trackMetadata.trackUri
-                              ) {
-                                return (
-                                  <audio>
-                                    <source src={preview_url} />
-                                  </audio>
-                                );
-                              }
-                            })}
-                          </button>
-                        </li>
+                                        if (
+                                          music.trackMetadata.artists.length === 2
+                                        ) {
+                                          const artists =
+                                            music.trackMetadata.artists.map(
+                                              (artist) => {
+                                                return artist.name;
+                                              }
+                                            );
+
+                                          return artists.join(" e ");
+                                        }
+
+                                        if (
+                                          music.trackMetadata.artists.length > 2
+                                        ) {
+                                          const artists =
+                                            music.trackMetadata.artists.map(
+                                              (artist) => {
+                                                return artist.name;
+                                              }
+                                            );
+
+                                          return artists.join(", ");
+                                        }
+                                      }
+                                    })()}
+                                  </>
+                                </p>
+                              </div>
+                            </div>
+                            <button
+                              className="player"
+                              // href={`https://open.spotify.com/track/${music.trackMetadata.trackUri.replace(
+                              //   "spotify:track:",
+                              //   ""
+                              // )}`}
+                            >
+                              <PlayCircle />
+                              {musicsUri.map((preview_url) => {
+                                console.log(preview_url);
+
+                                if (
+                                  preview_url === music.trackMetadata.trackUri
+                                ) {
+                                  return (
+                                    <audio>
+                                      <source src={preview_url} />
+                                    </audio>
+                                  );
+                                }
+                              })}
+                            </button>
+                          </li>
+                        </Link>
                       );
                     })}
                     <Link href="./explore">
