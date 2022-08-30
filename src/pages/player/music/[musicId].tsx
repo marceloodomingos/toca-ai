@@ -263,9 +263,7 @@ const PlayerArtistPage: NextPage = () => {
                           <p>
                             {duration && (
                               <>
-                                {!isNaN(duration)
-                                  ? calculateTime(Number(duration))
-                                  : calculateTime(duration)}
+                                {calculateTime(Number(duration))}
                               </>
                             )}
                           </p>
