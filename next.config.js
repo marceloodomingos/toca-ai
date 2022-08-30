@@ -26,7 +26,7 @@ module.exports = {
 
     NEXT_PUBLIC_GET_FULL_MUSIC_URL: "https://spotify-scraper.p.rapidapi.com/v1/track/download",
     NEXT_PUBLIC_GET_FULL_MUSIC_HOST: "spotify-scraper.p.rapidapi.com",
-    NEXT_PUBLIC_GET_FULL_MUSIC_KEY: "336acfbcd8mshda4bdeb84231ba3p19cd7djsnf5bf0ba7a1db",
+    NEXT_PUBLIC_GET_FULL_MUSIC_KEY: "d2bee321c0msh702295ed01405eep1070bcjsnace3629ec120",
 
     NEXT_PUBLIC_GET_MUSIC_LYRICS_URL: "https://spotify-scraper.p.rapidapi.com/v1/track/lyrics",
   },
