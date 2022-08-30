@@ -6,5 +6,5 @@ export const FullScreenEllipsis = styled.div`
     align-content: center;
 
     width: 100vw;
-    heigth: 100vh;
+    height: 100vh;
 `
