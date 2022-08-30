@@ -145,8 +145,7 @@ const Explore: NextPage = ({ musicsList }: any) => {
                                     {/* <p>#{music.chartEntryData.currentRank}</p> */}
                                     <img
                                       src={
-                                        track.data.albumOfTrack.coverArt
-                                          .sources[0].url
+                                        track.data.albumOfTrack?.coverArt?.sources[0].url
                                       }
                                       alt={track.data.name}
                                     />
@@ -234,7 +233,7 @@ const Explore: NextPage = ({ musicsList }: any) => {
                                   <div className="metadata">
                                     {/* <p>#{music.chartEntryData.currentRank}</p> */}
                                     <img
-                                      src={album.data.coverArt.sources[0].url}
+                                      src={album.data.coverArt?.sources[0].url}
                                       alt={album.data.name}
                                     />
                                   </div>
@@ -324,8 +323,7 @@ const Explore: NextPage = ({ musicsList }: any) => {
                                       {/* <p>#{music.chartEntryData.currentRank}</p> */}
                                       <img
                                         src={
-                                          artist.data.visuals.avatarImage
-                                            .sources[0].url
+                                          artist.data.visuals?.avatarImage?.sources[0].url
                                         }
                                         alt={artist.data.profile.name}
                                       />
