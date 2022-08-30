@@ -207,7 +207,7 @@ const PlayerArtistPage: NextPage = () => {
       </Head>
 
       <main>
-        {musicUrlData && musicLyric ? (
+        {musicUrlData && musicUrlData.youtubeVideo?.audio && musicLyric ? (
           <>
             <PlayerControlsContainer colorBg={colors && colors[0]}>
               <PlayerAudioControls
