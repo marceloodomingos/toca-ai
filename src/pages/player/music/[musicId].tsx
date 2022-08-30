@@ -272,18 +272,10 @@ const PlayerArtistPage: NextPage = () => {
                         </div>
                       </div>
                       <div className="volume">
-                        {audioSourceRef.current.muted && (
-                          <SpeakerNone
-                            onClick={() => {
-                              audioSourceRef.current.muted =
-                                !audioSourceRef.current.muted;
-                            }}
-                          />
-                        )}
-
-                        {audioSourceRef.current.volume > 0 &&
-                          audioSourceRef.current.volume <= 0.5 && (
-                            <SpeakerLow
+                        {audioSourceRef?.current && (
+                          <>
+                            {audioSourceRef.current.muted && (
+                            <SpeakerNone
                               onClick={() => {
                                 audioSourceRef.current.muted =
                                   !audioSourceRef.current.muted;
@@ -291,13 +283,25 @@ const PlayerArtistPage: NextPage = () => {
                             />
                           )}
 
-                        {audioSourceRef.current.volume > 0.5 && (
-                          <SpeakerHigh
-                            onClick={() => {
-                              audioSourceRef.current.muted =
-                                !audioSourceRef.current.muted;
-                            }}
-                          />
+                          {audioSourceRef.current.volume > 0 &&
+                            audioSourceRef.current.volume <= 0.5 && (
+                              <SpeakerLow
+                                onClick={() => {
+                                  audioSourceRef.current.muted =
+                                    !audioSourceRef.current.muted;
+                                }}
+                              />
+                            )}
+
+                          {audioSourceRef.current.volume > 0.5 && (
+                            <SpeakerHigh
+                              onClick={() => {
+                                audioSourceRef.current.muted =
+                                  !audioSourceRef.current.muted;
+                              }}
+                            />
+                          )}
+                        </>
                         )}
 
                         <input
