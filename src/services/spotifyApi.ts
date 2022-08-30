@@ -28,21 +28,21 @@ export const apiTop10BrazilDaily = axios
     console.error(error);
   });
 
-const randomPlaylistOptions = {
-  method: "GET",
-  url: process.env.NEXT_PUBLIC_RANDOM_PLAYLIST_TRACKS_URL,
-  params: { id: "5XGXPbAPHB7Qy0AsTHrg9x", offset: "0", limit: "100" },
-  headers: {
-    "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RANDOM_PLAYLIST_TRACKS_API_KEY,
-    "X-RapidAPI-Host": process.env.NEXT_PUBLIC_RANDOM_PLAYLIST_TRACKS_API_HOST,
-  },
-};
+// const randomPlaylistOptions = {
+//   method: "GET",
+//   url: process.env.NEXT_PUBLIC_RANDOM_PLAYLIST_TRACKS_URL,
+//   params: { id: "5XGXPbAPHB7Qy0AsTHrg9x", offset: "0", limit: "100" },
+//   headers: {
+//     "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RANDOM_PLAYLIST_TRACKS_API_KEY,
+//     "X-RapidAPI-Host": process.env.NEXT_PUBLIC_RANDOM_PLAYLIST_TRACKS_API_HOST,
+//   },
+// };
 
-export const apiRandomPlaylistOptions = axios
-  .request(randomPlaylistOptions)
-  .then(function (response) {
-    return response.data;
-  })
-  .catch(function (error) {
-    console.error(error);
-  });
+// export const apiRandomPlaylistOptions = axios
+//   .request(randomPlaylistOptions)
+//   .then(function (response) {
+//     return response.data;
+//   })
+//   .catch(function (error) {
+//     console.error(error);
+//   });
