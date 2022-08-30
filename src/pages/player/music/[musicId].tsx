@@ -13,7 +13,7 @@ import {
 } from "phosphor-react";
 import { useEffect, useRef, useState } from "react";
 import useImageColor from "use-image-color";
-import LoadingEllipsis from "~/components/Loading/LoadingEllipsis";
+import FullScreenLoadingEllipsis from "~/components/Loading/FullScreenLoadingEllipsis";
 import {
   AudioLyrics,
   PlayerAudioControls,
@@ -362,7 +362,7 @@ const PlayerArtistPage: NextPage = () => {
             </PlayerControlsContainer>
           </>
         ) : (
-          <LoadingEllipsis />
+          <FullScreenLoadingEllipsis />
         )}
       </main>
     </>
