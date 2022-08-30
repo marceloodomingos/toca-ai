@@ -146,10 +146,10 @@ const Home: NextPage = ({ musicsList }: any) => {
                   <>
                     {musics.map((music, index) => {
                       return (
-                        <Link key={index} href={music.trackMetadata.trackUri.replace(
+                        <Link key={index} href={`/player/music/${music.trackMetadata.trackUri.replace(
                           "spotify:track:",
                           ""
-                        )}>
+                        )}`}>
                           <li
                             id={music.trackMetadata.trackUri.replace(
                               "spotify:track:",
