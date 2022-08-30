@@ -59,13 +59,13 @@ const PlayerArtistPage: NextPage = () => {
   }, [router.query.musicId]);
 
   useEffect(() => {
-    if (musicData && musicData.tracks) {
+    if (musicData && musicData.tracks && musicData.tracks[0].uri) {
       const getMusicUrl = async () => {
         const musicUrl = await axios.get(
           process.env.NEXT_PUBLIC_GET_FULL_MUSIC_URL,
           {
             params: {
-              track: musicData.tracks[0].uri.replace("spotify:track:", ""),
+              track: musicData.tracks[0].uri?.replace("spotify:track:", ""),
             },
             headers: {
               "X-RapidAPI-Key": process.env.NEXT_PUBLIC_GET_FULL_MUSIC_KEY,
@@ -78,7 +78,7 @@ const PlayerArtistPage: NextPage = () => {
           process.env.NEXT_PUBLIC_GET_MUSIC_LYRICS_URL,
           {
             params: {
-              trackId: musicData.tracks[0].uri.replace("spotify:track:", ""),
+              trackId: musicData.tracks[0].uri?.replace("spotify:track:", ""),
               format: "json",
             },
             headers: {
