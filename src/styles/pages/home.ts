@@ -271,8 +271,7 @@ export const Features = styled.div`
 
   &:before,
   &:after {
-    --lines-height: 75px;
-    --lines-posiiton: -75px;
+    --lines-height: 45px;
 
     content: "";
     width: 35vw;
@@ -291,13 +290,13 @@ export const Features = styled.div`
 
   &:before {
     left: -10%;
-    bottom: calc(var(--lines-posiiton) / 2 + 0.25rem);
+    bottom: calc((calc(-1 * var(--lines-height))) / 2 + 0.25rem);
     transform: skewX(-20deg);
   }
 
   &:after {
     right: -10%;
-    top: calc(var(--lines-posiiton) / 2 - 0.25rem);
+    top: calc((calc(-1 * var(--lines-height)) / 2) - 0.25rem);
     transform: skewX(20deg);
   }
 
@@ -316,7 +315,7 @@ export const MostPopularSongs = styled.div`
   max-width: 1200px;
   margin: 0 auto;
 
-  padding: 10rem 1rem;
+  padding: 5rem 1rem;
   gap: 5rem;
 
   overflow: visible;
@@ -331,6 +330,12 @@ export const MostPopularSongs = styled.div`
     color: var(--brand-red);
 
     > h1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      gap: 1rem;
+
       font-size: 4rem;
       line-height: 100%;
       margin-bottom: 1rem;
@@ -407,7 +412,7 @@ export const MostPopularSongs = styled.div`
           z-index: 2;
 
           > i {
-            margin-top: -0.5rem;
+            /* margin-top: -0.5rem; */
             font-size: 1rem;
 
             font-weight: normal;
@@ -453,6 +458,8 @@ export const MostPopularSongs = styled.div`
           font-weight: bold;
 
           line-height: 100%;
+
+          width: 100%;
         }
 
         .artists {
@@ -465,6 +472,8 @@ export const MostPopularSongs = styled.div`
           > p {
             font-size: 1rem;
             font-weight: 200;
+
+            width: 100%;
           }
         }
 
@@ -493,6 +502,11 @@ export const MostPopularSongs = styled.div`
         max-width: 100px;
         height: 100%;
 
+        border: none;
+        cursor: pointer;
+
+        background: var(--beige-700);
+
         > svg {
           width: 100%;
           max-width: 3rem;
@@ -501,15 +515,12 @@ export const MostPopularSongs = styled.div`
 
           color: var(--beige-100);
 
-          cursor: pointer;
-
           @media (max-width: 768px) {
             color: var(--brand-red);
           }
         }
 
         @media (min-width: 768px) {
-          background: var(--beige-700);
           border-radius: 0 1rem 1rem 0;
 
           &:hover {
@@ -517,6 +528,10 @@ export const MostPopularSongs = styled.div`
               color: var(--brand-red);
             }
           }
+        }
+
+        @media (max-width: 768px) {
+          border-radius: 0 0 1rem 1rem;
         }
       }
 
@@ -560,7 +575,7 @@ export const MostPopularSongs = styled.div`
 
           width: 100%;
 
-          margin-bottom: 2.75rem;
+          margin-bottom: 2rem;
 
           > img {
             max-width: unset;
@@ -582,7 +597,7 @@ export const MostPopularSongs = styled.div`
 
         .about-music {
           text-align: center;
-          padding: 0 1rem;
+          padding: 1rem;
 
           > span {
             font-size: 1.25rem;
@@ -601,7 +616,7 @@ export const MostPopularSongs = styled.div`
           width: 100%;
           max-width: unset;
 
-          padding: 1rem 0;
+          padding: 0.5rem 0;
         }
       }
 
@@ -716,6 +731,23 @@ export const InviteFriend = styled.div`
 
           transform: rotate(-15deg);
         }
+
+        @media (max-width: 768px) {
+          font-size: 2.75rem;
+          width: 100%;
+          max-width: 420px;
+          line-height: 80%;
+        }
+      }
+
+      > p {
+        > u {
+          text-decoration: none;
+
+          @media (max-width: 768px) {
+            display: none;
+          }
+        }
       }
 
       > a {
@@ -749,6 +781,11 @@ export const InviteFriend = styled.div`
         text-align: center;
 
         align-items: center;
+
+        > h1 {
+          justify-content: center;
+          text-align: center;
+        }
       }
     }
   }

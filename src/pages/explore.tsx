@@ -7,6 +7,7 @@ import { Features, MostPopularSongs, Presentation } from "~/styles/pages/home";
 import { SearchContainer, SearchTopic } from "~/styles/pages/explore";
 import { useEffect, useRef, useState } from "react";
 import { apiTop200BrazilDaily } from "~/services/spotifyApi";
+import { useInView } from "react-intersection-observer";
 import {
   Heart,
   Link,
@@ -14,13 +15,24 @@ import {
   MaskHappy,
   MusicNotesPlus,
   PlayCircle,
+  SmileyXEyes,
+  X,
 } from "phosphor-react";
 import Footer from "~/components/Footer";
 import { SearchResponse } from "~/models/spotifyResponse";
 import LoadingEllipsis from "~/components/Loading/LoadingEllipsis";
 
-const Explore: NextPage = () => {
+export const getStaticProps: GetStaticProps = async () => {
+  const data = await apiTop200BrazilDaily;
+
+  return { props: { musicsList: data || null } };
+};
+
+const Explore: NextPage = ({ musicsList }: any) => {
+  const { ref: loadMoreMusics, inView } = useInView();
+
   const [musics, setMusics] = useState([]);
+  const [musicsLength, setMusicsLength] = useState(5);
   const [musicsResults, setMusicsResults] = useState<any>();
   const [search, setSearch] = useState("");
 
@@ -28,26 +40,26 @@ const Explore: NextPage = () => {
   const SearchBarRef = useRef(null);
 
   useEffect(() => {
-    if (!search) {
-      apiTop200BrazilDaily.then((response) => {
-        setMusics(response.slice(0, 200));
-      });
+    if (musicsList) {
+      setMusics(musicsList.slice(0, musicsLength));
     }
+  }, [musicsLength, musicsList]);
 
+  useEffect(() => {
     if (search && search.length > 0) {
       const delayDebounce = setTimeout(() => {
         const getMusics = async () => {
-          const res = await axios.get(process.env.SEARCH_URL, {
+          const res = await axios.get(process.env.NEXT_PUBLIC_SEARCH_URL, {
             params: {
               q: search,
               type: "multi",
               offset: "0",
               limit: "10",
-              numberOfTopResults: "5",
+              numberOfTopResults: "10",
             },
             headers: {
-              "X-RapidAPI-Key": process.env.SEARCH_API_KEY,
-              "X-RapidAPI-Host": process.env.SEARCH_API_HOST,
+              "X-RapidAPI-Key": process.env.NEXT_PUBLIC_SEARCH_API_KEY,
+              "X-RapidAPI-Host": process.env.NEXT_PUBLIC_SEARCH_API_HOST,
             },
           });
           setMusicsResults(res.data);
@@ -60,7 +72,11 @@ const Explore: NextPage = () => {
     }
   }, [search]);
 
-  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+  useEffect(() => {
+    if (inView && musicsLength <= 200) {
+      setMusicsLength(musicsLength + 5);
+    }
+  }, [inView, musicsLength]);
 
   return (
     <>
@@ -89,113 +105,26 @@ const Explore: NextPage = () => {
               onChange={(e) => setSearch(e.target.value)}
               ref={SearchBarRef}
             />
+            {search && (
+              <X
+                onClick={() => {
+                  SearchBarRef.current.value = "";
+                  setSearch("");
+                }}
+              />
+            )}
           </div>
         </SearchContainer>
-        {musics && !search && (
-          <>
-            {musics.length > 0 ? (
-              <MostPopularSongs ref={MostPopularSongsRef}>
-                <div className="info">
-                  <h1>Bombando no Brasil</h1>
-                  <p>As músicas diárias em que o play não para.</p>
-                </div>
-                <ul>
-                  {musics.map((music, index) => {
-                    return (
-                      <li
-                        key={index}
-                        id={music.trackMetadata.trackUri.replace(
-                          "spotify:track:",
-                          ""
-                        )}
-                      >
-                        <div className="metadata">
-                          <p>
-                            <i>#</i>
-                            {music.chartEntryData.currentRank}
-                          </p>
-                          <img
-                            src={music.trackMetadata.displayImageUri}
-                            alt={music.trackMetadata.trackName}
-                          />
-                        </div>
-                        <div className="about-music">
-                          <span>{music.trackMetadata.trackName}</span>
-                          <div className="artists">
-                            <p>
-                              <>
-                                {(() => {
-                                  if (music.trackMetadata.artists.length > 0) {
-                                    if (
-                                      music.trackMetadata.artists.length === 1
-                                    ) {
-                                      return music.trackMetadata.artists[0]
-                                        .name;
-                                    }
-
-                                    if (
-                                      music.trackMetadata.artists.length === 2
-                                    ) {
-                                      const artists =
-                                        music.trackMetadata.artists.map(
-                                          (artist) => {
-                                            return artist.name;
-                                          }
-                                        );
-
-                                      return artists.join(" e ");
-                                    }
-
-                                    if (
-                                      music.trackMetadata.artists.length > 2
-                                    ) {
-                                      const artists =
-                                        music.trackMetadata.artists.map(
-                                          (artist) => {
-                                            return artist.name;
-                                          }
-                                        );
-
-                                      return artists.join(", ");
-                                    }
-                                  }
-                                })()}
-                              </>
-                            </p>
-                          </div>
-                        </div>
-                        <a
-                          className="player"
-                          href={`https://open.spotify.com/track/${music.trackMetadata.trackUri.replace(
-                            "spotify:track:",
-                            ""
-                          )}`}
-                          rel="noreferrer"
-                          target="_blank"
-                        >
-                          <PlayCircle />
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </MostPopularSongs>
-            ) : (
-              <MostPopularSongs>
-                <div className="info">
-                  <h1>Bombando no Brasil</h1>
-                  <p>As músicas diárias em que o play não para.</p>
-                </div>
-                <LoadingEllipsis />
-              </MostPopularSongs>
-            )}
-          </>
-        )}
         {search && (
           <>
             {musicsResults ? (
               <>
-                {musicsResults != null ? (
+                {musicsResults.tracks.items &&
+                musicsResults.tracks.items.length > 0 &&
+                musicsResults.albums.items &&
+                musicsResults.albums.items.length > 0 &&
+                musicsResults.artists.items &&
+                musicsResults.artists.items.length > 0 ? (
                   <MostPopularSongs ref={MostPopularSongsRef}>
                     <div className="info">
                       <h1>Encontrou agora?</h1>
@@ -298,7 +227,7 @@ const Explore: NextPage = () => {
                                 <li
                                   key={index}
                                   id={album.data.uri.replace(
-                                    "spotify:track:",
+                                    "spotify:album:",
                                     ""
                                   )}
                                 >
@@ -423,9 +352,10 @@ const Explore: NextPage = () => {
                   <MostPopularSongs ref={MostPopularSongsRef}>
                     <div className="info">
                       <h1>Não encontramos...</h1>
+                      <p>Não há resultados para &quot;{search}&quot;.</p>
                       <p>
-                        Não há resultados para &quot;{search}&quot;. A gente vai
-                        tentar consertar isso, só nos dê um tempinho...
+                        Se for uma falha nossa, a gente vai tentar consertar
+                        isso, só nos dê um tempinho...
                       </p>
                     </div>
                   </MostPopularSongs>
@@ -436,16 +366,107 @@ const Explore: NextPage = () => {
             )}
           </>
         )}
-        <SearchContainer>
-          <div className="info">
-            <h1>Não encontrou?</h1>
-            <p>
-              Que pena que nossos filtros não ajudaram tanto assim de primeira.
-              Você pode tentar ser mais específico ou pesquisar por palavras
-              chaves que se refiram à sua busca.
-            </p>
-          </div>
-        </SearchContainer>
+        {musics && (
+          <>
+            {musics.length > 0 ? (
+              <MostPopularSongs ref={MostPopularSongsRef}>
+                <div className="info">
+                  <h1>Bombando no Brasil</h1>
+                  <p>As músicas diárias em que o play não para.</p>
+                </div>
+                <ul>
+                  {musics.map((music, index) => {
+                    return (
+                      <li
+                        key={index}
+                        id={music.trackMetadata.trackUri.replace(
+                          "spotify:track:",
+                          ""
+                        )}
+                      >
+                        <div className="metadata">
+                          <p>
+                            <i>#</i>
+                            {music.chartEntryData.currentRank}
+                          </p>
+                          <img
+                            src={music.trackMetadata.displayImageUri}
+                            alt={music.trackMetadata.trackName}
+                          />
+                        </div>
+                        <div className="about-music">
+                          <span>{music.trackMetadata.trackName}</span>
+                          <div className="artists">
+                            <p>
+                              <>
+                                {(() => {
+                                  if (music.trackMetadata.artists.length > 0) {
+                                    if (
+                                      music.trackMetadata.artists.length === 1
+                                    ) {
+                                      return music.trackMetadata.artists[0]
+                                        .name;
+                                    }
+
+                                    if (
+                                      music.trackMetadata.artists.length === 2
+                                    ) {
+                                      const artists =
+                                        music.trackMetadata.artists.map(
+                                          (artist) => {
+                                            return artist.name;
+                                          }
+                                        );
+
+                                      return artists.join(" e ");
+                                    }
+
+                                    if (
+                                      music.trackMetadata.artists.length > 2
+                                    ) {
+                                      const artists =
+                                        music.trackMetadata.artists.map(
+                                          (artist) => {
+                                            return artist.name;
+                                          }
+                                        );
+
+                                      return artists.join(", ");
+                                    }
+                                  }
+                                })()}
+                              </>
+                            </p>
+                          </div>
+                        </div>
+                        <a
+                          className="player"
+                          href={`https://open.spotify.com/track/${music.trackMetadata.trackUri.replace(
+                            "spotify:track:",
+                            ""
+                          )}`}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          <PlayCircle />
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <div ref={loadMoreMusics}></div>
+              </MostPopularSongs>
+            ) : (
+              <MostPopularSongs>
+                <div className="info">
+                  <h1>Bombando no Brasil</h1>
+                  <p>As músicas diárias em que o play não para.</p>
+                </div>
+                <LoadingEllipsis />
+              </MostPopularSongs>
+            )}
+          </>
+        )}
       </main>
 
       <Footer />

@@ -9,8 +9,8 @@ import {
   MostPopularSongs,
   Presentation,
 } from "~/styles/pages/home";
-import { useEffect, useRef, useState } from "react";
-import { apiTop200BrazilDaily } from "~/services/spotifyApi";
+import { useEffect, useState } from "react";
+import { apiTop10BrazilDaily } from "~/services/spotifyApi";
 import {
   ArrowRight,
   Headphones,
@@ -21,9 +21,10 @@ import {
 } from "phosphor-react";
 import Footer from "~/components/Footer";
 import LoadingEllipsis from "~/components/Loading/LoadingEllipsis";
+import axios from "axios";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await apiTop200BrazilDaily;
+  const data = await apiTop10BrazilDaily;
 
   return { props: { musicsList: data || null } };
 };
@@ -34,9 +35,46 @@ const Home: NextPage = ({ musicsList }: any) => {
 
   useEffect(() => {
     if (musicsList) {
-      setMusics(musicsList.slice(0, 10));
+      setMusics(musicsList);
     }
   }, [musicsList]);
+
+  useEffect(() => {
+    async function getMusicsUri() {
+      const getMusics = musics.map(async (music, index) => {
+        const trackUriID = music.trackMetadata.trackUri.replace(
+          "spotify:track:",
+          ""
+        );
+
+        if (index <= 10) {
+          const getPreviewMusicUrl = await axios.get(
+            process.env.NEXT_PUBLIC_GET_PREVIEW_MUSIC_URL,
+            {
+              params: {
+                ids: trackUriID,
+              },
+              headers: {
+                "X-RapidAPI-Key": process.env.NEXT_PUBLIC_SEARCH_API_KEY,
+                "X-RapidAPI-Host": process.env.NEXT_PUBLIC_SEARCH_API_HOST,
+              },
+            }
+          );
+
+          return {
+            preview_url: getPreviewMusicUrl.data.tracks[0].preview_url,
+          };
+        }
+      });
+
+      const getPreviewUrl = await Promise.all(getMusics).then((response) =>
+        setMusicsUri(response)
+      );
+      console.log(getPreviewUrl);
+    }
+
+    getMusicsUri();
+  }, [musics]);
 
   return (
     <>
@@ -53,7 +91,7 @@ const Home: NextPage = ({ musicsList }: any) => {
             <p>Sua experiência musical mais descomplicada e divertida.</p>
             <Link href="/">
               <a>
-                Começar agora <ArrowRight />
+                Saiba mais <ArrowRight />
               </a>
             </Link>
           </div>
@@ -107,46 +145,6 @@ const Home: NextPage = ({ musicsList }: any) => {
                 <ul>
                   <>
                     {musics.map((music, index) => {
-                      // setMusicsUri((prev) => [
-                      //   ...prev,
-                      //   music.trackMetadata.trackUri.replace("spotify:track:", ""),
-                      // ]);
-
-                      // setMusicsUri(
-                      //   (map) =>
-                      //     new Map(
-                      //       map.set(
-                      //         index,
-                      //         music.trackMetadata.trackUri.replace(
-                      //           "spotify:track:",
-                      //           ""
-                      //         )
-                      //       )
-                      //     )
-                      // );
-
-                      // const getMusics = async () => {
-                      //   if (music.trackMetadata.trackUri) {
-                      //     const res = await axios.get(
-                      //       process.env.GET_PREVIEW_MUSIC_URL,
-                      //       {
-                      //         params: {
-                      //           ids: music.trackMetadata.trackUri.replace(
-                      //             "spotify:track:",
-                      //             ""
-                      //           ),
-                      //         },
-                      //         headers: {
-                      //           "X-RapidAPI-Key": process.env.SEARCH_API_KEY,
-                      //           "X-RapidAPI-Host": process.env.SEARCH_API_HOST,
-                      //         },
-                      //       }
-                      //     );
-
-                      //     console.log(res.data.tracks[0].preview_url);
-                      //   }
-                      // };
-
                       return (
                         <li
                           key={index}
@@ -212,17 +210,28 @@ const Home: NextPage = ({ musicsList }: any) => {
                               </p>
                             </div>
                           </div>
-                          <a
+                          <button
                             className="player"
-                            href={`https://open.spotify.com/track/${music.trackMetadata.trackUri.replace(
-                              "spotify:track:",
-                              ""
-                            )}`}
-                            rel="noreferrer"
-                            target="_blank"
+                            // href={`https://open.spotify.com/track/${music.trackMetadata.trackUri.replace(
+                            //   "spotify:track:",
+                            //   ""
+                            // )}`}
                           >
                             <PlayCircle />
-                          </a>
+                            {musicsUri.map((preview_url) => {
+                              console.log(preview_url);
+
+                              if (
+                                preview_url === music.trackMetadata.trackUri
+                              ) {
+                                return (
+                                  <audio>
+                                    <source src={preview_url} />
+                                  </audio>
+                                );
+                              }
+                            })}
+                          </button>
                         </li>
                       );
                     })}
@@ -253,8 +262,11 @@ const Home: NextPage = ({ musicsList }: any) => {
               </h1>
               <p>
                 Que tal uma companhia para aproveitar a imensidão da nossa
-                galeria de músicas? Assim vocês poderão aproveitar e usufruir do{" "}
-                <i>Music Party</i>.
+                galeria de músicas?{" "}
+                <u>
+                  Assim vocês poderão aproveitar e usufruir do{" "}
+                  <i>Music Party</i>.
+                </u>
               </p>
               <a
                 href="whatsapp://send?text=Ei! Vem aproveitar o *Toca aí* comigo, tem várias músicas legais!%0a%0aSó acessar:%0ahttps://toca-ai.vercel.app"

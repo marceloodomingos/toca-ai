@@ -26,5 +26,8 @@ export const Variables = css`
       var(--beige-500),
       transparent
     );
+
+    // transitions
+    --transition-2s-ease: all 2s ease;
   }
 `;

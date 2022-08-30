@@ -15,7 +15,7 @@ export const FooterContainer = styled.footer<FooterProps>`
   background: ${(props: FooterProps) =>
     props.dark ? "var(--black)" : "var(--beige-500)"};
 
-  padding: 3rem 0;
+  padding: 3rem 1rem;
   gap: 1rem;
 
   color: ${(props: FooterProps) =>

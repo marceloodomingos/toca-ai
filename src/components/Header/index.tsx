@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MagnifyingGlass } from "phosphor-react";
+import { useEffect, useState } from "react";
 import { HeaderContainer, NewsContainer } from "./styles";
 
 interface HeaderProps {
@@ -8,11 +9,26 @@ interface HeaderProps {
 }
 
 export default function Header({ glass, white }: HeaderProps) {
+  const [toggleMenu, setToggleMenu] = useState(false);
+
   const currentLocation = location.pathname;
+
+  const today = new Date();
+  const actualMonth = today.getMonth() + 1;
+
+  useEffect(() => {
+    const body = document.querySelector("body");
+
+    if (toggleMenu) {
+      body.classList.add("open");
+    } else {
+      body.classList.remove("open");
+    }
+  }, [toggleMenu]);
 
   return (
     <>
-      {currentLocation === "/" && (
+      {currentLocation === "/" && actualMonth === 9 && (
         <NewsContainer>
           <p>
             Aproveite a promoção <i>Rainbow</i> durante todo o mês de setembro!{" "}
@@ -28,11 +44,11 @@ export default function Header({ glass, white }: HeaderProps) {
         <nav>
           <Link href="/">
             <a className="logo">
-              <img src="../../logos/logo2.png" alt="Toca Aí logo" />
+              <img src="../../logos/toca-ai-logo.svg" alt="Toca Aí logo" />
               <span>Toca aí</span>
             </a>
           </Link>
-          <ul className="navbar">
+          <ul className={`navbar${toggleMenu ? " open" : ""}`}>
             <Link href="/">
               <a>Início</a>
             </Link>
@@ -51,6 +67,15 @@ export default function Header({ glass, white }: HeaderProps) {
               </Link>
             )}
           </ul>
+          <button
+            className={`${toggleMenu ? "open" : ""}`}
+            onClick={() => setToggleMenu(!toggleMenu)}
+          >
+            <div>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
         </nav>
       </HeaderContainer>
     </>

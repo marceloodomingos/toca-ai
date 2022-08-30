@@ -8,7 +8,7 @@ export const SearchContainer = styled.div`
 
   height: 100%;
   width: 100%;
-  margin: 0px auto;
+  margin: 0 auto;
   background: var(--beige-500);
 
   padding: 10rem 1rem;
@@ -58,7 +58,7 @@ export const SearchContainer = styled.div`
     color: var(--brand-red);
 
     width: 100%;
-    max-width: 1200px;
+    max-width: calc(1200px - 2rem);
 
     cursor: text;
 
