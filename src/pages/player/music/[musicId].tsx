@@ -88,10 +88,13 @@ const PlayerArtistPage: NextPage = () => {
           }
         );
 
-        setMusicUrlData(musicUrl.data);
-        setMusicLyrics(musicLyrics.data);
+        if (musicUrl) {
+          setMusicUrlData(musicUrl.data);
+        } 
 
-        console.log(musicUrlData);
+        if (musicLyrics) {
+          setMusicUrlData(musicLyrics.data);
+        } 
 
         // router.push(
         //   `/player/${musicUrlData?.spotifyTrack?.artists[0].name
@@ -207,7 +210,7 @@ const PlayerArtistPage: NextPage = () => {
       </Head>
 
       <main>
-        {musicUrlData && musicUrlData.youtubeVideo?.audio && musicLyric ? (
+        {musicUrlData && musicUrlData.youtubeVideo?.audio ? (
           <>
             <PlayerControlsContainer colorBg={colors && colors[0]}>
               <PlayerAudioControls
