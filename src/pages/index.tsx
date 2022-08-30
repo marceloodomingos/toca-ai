@@ -33,7 +33,7 @@ const Home: NextPage = ({ musicsList }: any) => {
   const [musics, setMusics] = useState([]);
   const [musicsUri, setMusicsUri] = useState([]);
 
-  console.log(NEXT_PUBLIC_TOP_200_TRACKS_URL);
+  console.log(process.env.NEXT_PUBLIC_TOP_200_TRACKS_URL);
 
   useEffect(() => {
     if (musicsList) {
