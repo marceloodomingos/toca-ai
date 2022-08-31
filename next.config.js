@@ -12,13 +12,13 @@ module.exports = {
     node: true,
     NEXT_PUBLIC_TOP_200_TRACKS_URL: "https://spotify81.p.rapidapi.com/top_200_tracks",
     NEXT_PUBLIC_TOP_200_TRACKS_API_HOST: "spotify81.p.rapidapi.com",
-    NEXT_PUBLIC_TOP_200_TRACKS_API_KEY: "d2bee321c0msh702295ed01405eep1070bcjsnace3629ec120",
+    NEXT_PUBLIC_TOP_200_TRACKS_API_KEY: "060ee4ac4cmsh24f71febabe3864p1902c7jsn5b68341cd09d",
 
     NEXT_PUBLIC_GET_PREVIEW_MUSIC_URL: "https://spotify23.p.rapidapi.com/tracks/",
 
     NEXT_PUBLIC_RANDOM_PLAYLIST_TRACKS_URL: "https://spotify23.p.rapidapi.com/playlist_tracks/",
     NEXT_PUBLIC_RANDOM_PLAYLIST_TRACKS_API_HOST: "spotify23.p.rapidapi.com",
-    NEXT_PUBLIC_RANDOM_PLAYLIST_TRACKS_API_KEY: "c3ca0d6a7cmsh562a8864a08ee25p1bbec9jsn0f9276f83b0d",
+    NEXT_PUBLIC_RANDOM_PLAYLIST_TRACKS_API_KEY: "060ee4ac4cmsh24f71febabe3864p1902c7jsn5b68341cd09d",
 
     NEXT_PUBLIC_SEARCH_URL: "https://spotify23.p.rapidapi.com/search/",
     NEXT_PUBLIC_SEARCH_API_HOST: "spotify23.p.rapidapi.com",
