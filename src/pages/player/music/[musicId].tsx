@@ -52,14 +52,16 @@ const PlayerArtistPage: NextPage = () => {
         }
       );
 
-      setMusicData(res.data);
+      if (res) {
+        setMusicData(res.data);
+      }
     };
 
     getMusicInfo();
   }, [router.query.musicId]);
 
   useEffect(() => {
-    if (musicData && musicData.tracks && musicData.tracks[0].uri) {
+    if (musicData && musicData.tracks) {
       const getMusicUrl = async () => {
         const musicUrl = await axios.get(
           process.env.NEXT_PUBLIC_GET_FULL_MUSIC_URL,
