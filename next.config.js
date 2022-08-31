@@ -22,11 +22,11 @@ module.exports = {
 
     NEXT_PUBLIC_SEARCH_URL: "https://spotify23.p.rapidapi.com/search/",
     NEXT_PUBLIC_SEARCH_API_HOST: "spotify23.p.rapidapi.com",
-    NEXT_PUBLIC_SEARCH_API_KEY: "d2bee321c0msh702295ed01405eep1070bcjsnace3629ec120",
+    NEXT_PUBLIC_SEARCH_API_KEY: "060ee4ac4cmsh24f71febabe3864p1902c7jsn5b68341cd09d",
 
     NEXT_PUBLIC_GET_FULL_MUSIC_URL: "https://spotify-scraper.p.rapidapi.com/v1/track/download",
     NEXT_PUBLIC_GET_FULL_MUSIC_HOST: "spotify-scraper.p.rapidapi.com",
-    NEXT_PUBLIC_GET_FULL_MUSIC_KEY: "d2bee321c0msh702295ed01405eep1070bcjsnace3629ec120",
+    NEXT_PUBLIC_GET_FULL_MUSIC_KEY: "060ee4ac4cmsh24f71febabe3864p1902c7jsn5b68341cd09d",
 
     NEXT_PUBLIC_GET_MUSIC_LYRICS_URL: "https://spotify-scraper.p.rapidapi.com/v1/track/lyrics",
   },
