@@ -39,21 +39,25 @@ const PlayerArtistPage: NextPage = () => {
 
   useEffect(() => {
     const getMusicInfo = async () => {
-      const res = await axios.get(
-        process.env.NEXT_PUBLIC_GET_PREVIEW_MUSIC_URL,
-        {
-          params: {
-            ids: router.query.musicId,
-          },
-          headers: {
-            "X-RapidAPI-Key": process.env.NEXT_PUBLIC_SEARCH_API_KEY,
-            "X-RapidAPI-Host": process.env.NEXT_PUBLIC_SEARCH_API_HOST,
-          },
-        }
-      );
+      try {
+        const res = await axios.get(
+          process.env.NEXT_PUBLIC_GET_PREVIEW_MUSIC_URL,
+          {
+            params: {
+              ids: router.query.musicId,
+            },
+            headers: {
+              "X-RapidAPI-Key": process.env.NEXT_PUBLIC_SEARCH_API_KEY,
+              "X-RapidAPI-Host": process.env.NEXT_PUBLIC_SEARCH_API_HOST,
+            },
+          }
+        );
 
-      if (res) {
-        setMusicData(res.data);
+        if (res && res.data) {
+          setMusicData(res.data);
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
 
@@ -61,58 +65,63 @@ const PlayerArtistPage: NextPage = () => {
   }, [router.query.musicId]);
 
   useEffect(() => {
-    if (musicData && musicData.tracks) {
-      const getMusicUrl = async () => {
-        const musicUrl = await axios.get(
-          process.env.NEXT_PUBLIC_GET_FULL_MUSIC_URL,
-          {
-            params: {
-              track: musicData.tracks[0].uri?.replace("spotify:track:", ""),
-            },
-            headers: {
-              "X-RapidAPI-Key": process.env.NEXT_PUBLIC_GET_FULL_MUSIC_KEY,
-              "X-RapidAPI-Host": process.env.NEXT_PUBLIC_GET_FULL_MUSIC_HOST,
-            },
-          }
-        );
+    if (!musicData) return;
 
-        const musicLyrics = await axios.get(
-          process.env.NEXT_PUBLIC_GET_MUSIC_LYRICS_URL,
-          {
+    const { tracks } = musicData;
+    if (!tracks) return;
+
+    const uri = tracks[0].uri?.replace("spotify:track:", "");
+
+    const getMusicUrl = async () => {
+      try {
+        const [
+          musicUrl,
+          // musicLyrics
+        ] = await Promise.all([
+          axios.get(process.env.NEXT_PUBLIC_GET_FULL_MUSIC_URL, {
             params: {
-              trackId: musicData.tracks[0].uri?.replace("spotify:track:", ""),
-              format: "json",
+              track: uri,
             },
             headers: {
               "X-RapidAPI-Key": process.env.NEXT_PUBLIC_GET_FULL_MUSIC_KEY,
               "X-RapidAPI-Host": process.env.NEXT_PUBLIC_GET_FULL_MUSIC_HOST,
             },
-          }
-        );
+          }),
+          // axios.get(process.env.NEXT_PUBLIC_GET_MUSIC_LYRICS_URL, {
+          //   params: {
+          //     trackId: uri,
+          //     format: "json",
+          //   },
+          //   headers: {
+          //     "X-RapidAPI-Key": process.env.NEXT_PUBLIC_GET_FULL_MUSIC_KEY,
+          //     "X-RapidAPI-Host": process.env.NEXT_PUBLIC_GET_FULL_MUSIC_HOST,
+          //   },
+          // }),
+        ]);
 
         if (musicUrl) {
-          setMusicUrlData(musicUrl.data);
-        } 
+          const { data } = musicUrl;
+          setMusicUrlData(data);
+        }
 
-        if (musicLyrics) {
-          setMusicUrlData(musicLyrics.data);
-        } 
+        // if (musicLyrics) setMusicUrlData(musicLyrics.data);
+      } catch (error) {
+        console.log(error);
+      }
 
-        // router.push(
-        //   `/player/${musicUrlData?.spotifyTrack?.artists[0].name
-        //     .toLowerCase()
-        //     .replace(" ", "-")}/${musicUrlData?.spotifyTrack?.name
-        //     .toLowerCase()
-        //     .replace(" ", "-")}`,
-        //   undefined,
+      // router.push(
+      //   `/player/${musicUrlData?.spotifyTrack?.artists[0].name
+      //     .toLowerCase()
+      //     .replace(" ", "-")}/${musicUrlData?.spotifyTrack?.name
+      //     .toLowerCase()
+      //     .replace(" ", "-")}`,
+      //   undefined,
 
-        //   { shallow: true }
-        // );
-      };
+      //   { shallow: true }
+      // );
+    };
 
-      getMusicUrl();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    getMusicUrl();
   }, [musicData]);
 
   useEffect(() => {
@@ -266,11 +275,7 @@ const PlayerArtistPage: NextPage = () => {
                             ref={progressBar}
                           />
                           <p>
-                            {duration && (
-                              <>
-                                {calculateTime(Number(duration))}
-                              </>
-                            )}
+                            {duration && <>{calculateTime(Number(duration))}</>}
                           </p>
                         </div>
                       </div>
@@ -278,17 +283,7 @@ const PlayerArtistPage: NextPage = () => {
                         {audioSourceRef?.current && (
                           <>
                             {audioSourceRef.current.muted && (
-                            <SpeakerNone
-                              onClick={() => {
-                                audioSourceRef.current.muted =
-                                  !audioSourceRef.current.muted;
-                              }}
-                            />
-                          )}
-
-                          {audioSourceRef.current.volume > 0 &&
-                            audioSourceRef.current.volume <= 0.5 && (
-                              <SpeakerLow
+                              <SpeakerNone
                                 onClick={() => {
                                   audioSourceRef.current.muted =
                                     !audioSourceRef.current.muted;
@@ -296,15 +291,25 @@ const PlayerArtistPage: NextPage = () => {
                               />
                             )}
 
-                          {audioSourceRef.current.volume > 0.5 && (
-                            <SpeakerHigh
-                              onClick={() => {
-                                audioSourceRef.current.muted =
-                                  !audioSourceRef.current.muted;
-                              }}
-                            />
-                          )}
-                        </>
+                            {audioSourceRef.current.volume > 0 &&
+                              audioSourceRef.current.volume <= 0.5 && (
+                                <SpeakerLow
+                                  onClick={() => {
+                                    audioSourceRef.current.muted =
+                                      !audioSourceRef.current.muted;
+                                  }}
+                                />
+                              )}
+
+                            {audioSourceRef.current.volume > 0.5 && (
+                              <SpeakerHigh
+                                onClick={() => {
+                                  audioSourceRef.current.muted =
+                                    !audioSourceRef.current.muted;
+                                }}
+                              />
+                            )}
+                          </>
                         )}
 
                         <input
@@ -338,32 +343,27 @@ const PlayerArtistPage: NextPage = () => {
                       <h1>{musicUrlData?.spotifyTrack?.name}</h1>
                       <span>{musicUrlData?.spotifyTrack?.artists[0].name}</span>
                     </div>
-                    <img
-                      src={
-                        musicUrlData?.spotifyTrack?.artists[0].visuals.avatar[1]
-                          .url
-                      }
-                      alt={musicUrlData?.spotifyTrack?.artists[0].name}
-                    />
                   </div>
-                  <ul>
-                    {musicLyric.map((line, index) => {
-                      return (
-                        <p
-                          key={index}
-                          className={
-                            currentTime.toString() ===
-                            calculateTime(line.startMs)
-                              ? "singing"
-                              : ""
-                          }
-                          id={`startMs:${line.startMs} durMs:${line.durMs}`}
-                        >
-                          {line.text}
-                        </p>
-                      );
-                    })}
-                  </ul>
+                  {musicLyric && (
+                    <ul>
+                      {musicLyric.map((line, index) => {
+                        return (
+                          <p
+                            key={index}
+                            className={
+                              currentTime.toString() ===
+                              calculateTime(line.startMs)
+                                ? "singing"
+                                : ""
+                            }
+                            id={`startMs:${line.startMs} durMs:${line.durMs}`}
+                          >
+                            {line.text}
+                          </p>
+                        );
+                      })}
+                    </ul>
+                  )}
                 </AudioLyrics>
               )}
             </PlayerControlsContainer>
